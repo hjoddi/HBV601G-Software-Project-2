@@ -15,6 +15,8 @@ public class NetworkManager {
     private static NetworkManager mInstance;
     private static RequestQueue mQueue;
     private Context mContext;
+    private static final String BASE_URL = "10.0.2.2:8080/"; // Tutorial notaði þetta að því
+                                                             //  að hann notaði localhost.
 
     /**
      * Returns the instance of the singleton NetworkManager, or creates the
@@ -50,5 +52,11 @@ public class NetworkManager {
         return mQueue;
     }
 
+    /**
+     * Gets a recipe from the backend. TODO
+     */
+    public void getRecipe() {
+
+    }
 
 }
