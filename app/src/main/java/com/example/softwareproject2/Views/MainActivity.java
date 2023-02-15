@@ -3,6 +3,7 @@ package com.example.softwareproject2.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.softwareproject2.Controllers.MainActivityController;
 import com.example.softwareproject2.R;
@@ -13,6 +14,7 @@ import com.example.softwareproject2.R;
 public class MainActivity extends AppCompatActivity {
 
     private MainActivityController mController;
+    private Button mBtnGetRecipes; // Temp button for dev purposes.
 
     /**
      * This method is called when the view is activated.
@@ -26,5 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Connect to controller.
         mController = new MainActivityController(this);
+
+        // Connect UI widgets.
+        mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
     }
 }
