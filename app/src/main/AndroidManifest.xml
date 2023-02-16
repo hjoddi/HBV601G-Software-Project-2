@@ -11,11 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SoftwareProject2"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Views.MainActivity"
-            android:exported="true" />
-
+            android:name=".Activities.MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -25,7 +25,7 @@ public class NetworkManager {
     private static NetworkManager mInstance;
     private static RequestQueue mQueue;
     private Context mContext;
-    private static final String BASE_URL = "http://localhost:8080/"; //"10.0.2.2:8080/"; // Tutorial notaði þetta að því
+    private static final String BASE_URL = "10.0.2.2:8080/"; // Tutorial notaði þetta að því
                                                              //  að hann notaði localhost.
 
     /**
@@ -63,11 +63,11 @@ public class NetworkManager {
     }
 
     /**
-     * Gets a recipe from the backend.
+     * Gets a recipe from the backend. TODO: Fá til að virka.
      */
     public void getRecipes(NetworkCallback<List<Recipe>> callback) {
         StringRequest request = new StringRequest(
-                Request.Method.GET, BASE_URL + "restRecipes", new Response.Listener<String>() {
+                Request.Method.GET,"10.0.2.2:8080/restRecipes", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();

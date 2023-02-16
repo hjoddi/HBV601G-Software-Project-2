@@ -23,22 +23,8 @@ public class Recipe {
 	private HashSet<String> raters; 	// Contains usernames of those who have rated.
 	private int rating;	// Recipe's rating. Average of ratings.
 
-	/**
-	 * Getters and setters.
-	 */
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public int getRating() {
-		return rating;
-	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+
 	public void addRating(int rating, String username) {
 		System.out.println("DEBUG - addRating()");
 		if (!this.raters.contains(username)) {
@@ -47,33 +33,8 @@ public class Recipe {
 			this.raters.add(username);
 		}
 	}
-	public HashSet<String> getIngredients() {
-		return ingredients;
-	}
-	public HashSet<String> getComments() { return comments; }
-	public String getInstructions() {
-		return instructions;
-	}
-	public Long getId() {
-		return id;
-	}
-	public String getName() {
-		return name;
-	}
-	public HashSet<Integer> getRatings() {
-		return ratings;
-	}
-	public HashSet<String> getRaters() {
-		return raters;
-	}
 
-	public String getImageName() {
-		return imageName;
-	}
 
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
 
 	/**
 	 * Constructor for Recipe object.
@@ -116,5 +77,88 @@ public class Recipe {
 				", instructions='" + instructions +
 				", comments='" + comments + '\'' +
 				'}';
+	}
+
+	/**
+	 * Getters and setters.
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public HashSet<String> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(HashSet<String> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public String getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public HashSet<String> getComments() {
+		return comments;
+	}
+
+	public void setComments(HashSet<String> comments) {
+		this.comments = comments;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public HashSet<Integer> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(HashSet<Integer> ratings) {
+		this.ratings = ratings;
+	}
+
+	public HashSet<String> getRaters() {
+		return raters;
+	}
+
+	public void setRaters(HashSet<String> raters) {
+		this.raters = raters;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 }
