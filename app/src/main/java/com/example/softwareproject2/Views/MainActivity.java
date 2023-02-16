@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityController mController;
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Recipe[] recipeList;
+    private List<Recipe> recipeBank;
 
     /**
      * This method is called when the view is activated.
