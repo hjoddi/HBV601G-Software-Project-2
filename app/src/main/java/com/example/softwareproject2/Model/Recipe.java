@@ -1,11 +1,12 @@
 package com.example.softwareproject2.Model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 /**
  * Recipe object. Contains information pertaining to a particular recipe.
  */
-public class Recipe {
+public class Recipe implements Serializable {
 	/**
 	 * Variables.
 	 */

@@ -14,6 +14,7 @@ import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.RecipeService;
 import com.example.softwareproject2.Services.TempBackendProvider;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class SearchActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                // TODO: Check if input empty, if not empty then populate filteredRecipes before moving on to SearchResultActivity.
+                // TODO: Move on to SearchResultActivity.
 
                 // Check if input empty.
                 String filterInput = mSearchInput.getText().toString();
@@ -73,6 +74,8 @@ public class SearchActivity extends AppCompatActivity {
                     mFilteredRecipes = recipeService.filteredRecipeList(filterInput);
                 }
 
+                // Navigate to SearchResultActivity.
+                openSearchResultActivity();
             }
         });
     }
@@ -84,5 +87,15 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Navigates to SearchResultActivity; takes with it the list of
+     *  filtered recipes.
+     */
+    private void openSearchResultActivity() {
+        Intent intent = new Intent(this, SearchResultActivity.class);
+        intent.putExtra("filteredRecipes", (Serializable) mFilteredRecipes);
+        startActivity(intent);
     }
 }
