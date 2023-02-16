@@ -24,6 +24,10 @@ public class RecipeService {
         this.mRecipeBank = TBP.getRecipes();
     }
 
+    public List<Recipe> allRecipes() {
+        return mRecipeBank;
+    }
+
     /**
      * Returns a list of recipes whose name or ingredients match the filter string.
      * @param filter - The string which should match a recipe's name or ingredients.

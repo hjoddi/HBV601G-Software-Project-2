@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
@@ -20,7 +21,10 @@ public class SearchActivity extends AppCompatActivity {
     // Instance variables.
     private Button mBtnBack, mBtnSearch;
     private EditText mSearchInput;
+    private TextView mInputPrompt;
+
     private RecipeService recipeService;
+    private List<Recipe> mFilteredRecipes; // List of recipes matching the given filter.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +35,44 @@ public class SearchActivity extends AppCompatActivity {
         // Connect UI widgets.
         mBtnBack = findViewById(R.id.searchActivityBtnBack);
         mBtnSearch = findViewById(R.id.searchActivityBtnSearch);
+        mSearchInput = findViewById(R.id.searchActivityTxtSearch);
+        mInputPrompt = findViewById(R.id.searchActivityInputPrompt);
 
         // Connect RecipeService.
         recipeService = new RecipeService();
 
         // Establish widget functionalities.
         mBtnBack.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Calls the openMainActivity() function.
+             * @param v - The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 openMainActivity();
+            }
+        });
+        mBtnSearch.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Checks if user wrote something in the filter. If the
+             *  filter is empty, every recipe will be returned by the
+             *  search; otherwise only those recipes matching the
+             *  filter will be returned by the search.
+             * @param v - The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                // TODO: Check if input empty, if not empty then populate filteredRecipes before moving on to SearchResultActivity.
+
+                // Check if input empty.
+                String filterInput = mSearchInput.getText().toString();
+                if (filterInput.equals("")) {
+                    mFilteredRecipes = recipeService.allRecipes();
+                }
+                else {
+                    mFilteredRecipes = recipeService.filteredRecipeList(filterInput);
+                }
+
             }
         });
     }
