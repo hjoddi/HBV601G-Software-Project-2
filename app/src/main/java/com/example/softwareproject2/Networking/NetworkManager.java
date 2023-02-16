@@ -65,7 +65,7 @@ public class NetworkManager {
     /**
      * Gets a recipe from the backend.
      */
-    public void getRecipes() {
+    public void getRecipes(NetworkCallback<List<Recipe>> callback) {
         StringRequest request = new StringRequest(
                 Request.Method.GET, BASE_URL + "restRecipes", new Response.Listener<String>() {
             @Override
@@ -74,11 +74,12 @@ public class NetworkManager {
                 Type listType = new TypeToken<List<Recipe>>() {
                 }.getType();
                 List<Recipe> recipeBank = gson.fromJson(response, listType);
+                callback.onSuccess(recipeBank);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                callback.onFailure(error.toString());
             }
         }
         );
