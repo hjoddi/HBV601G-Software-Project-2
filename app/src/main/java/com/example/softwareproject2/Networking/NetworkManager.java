@@ -2,8 +2,18 @@ package com.example.softwareproject2.Networking;
 
 import android.content.Context;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.softwareproject2.Model.Recipe;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * Klasi sem hefur einungis það hlutverk að sækja hluti frá networkinu og skila því
@@ -15,7 +25,7 @@ public class NetworkManager {
     private static NetworkManager mInstance;
     private static RequestQueue mQueue;
     private Context mContext;
-    private static final String BASE_URL = "10.0.2.2:8080/"; // Tutorial notaði þetta að því
+    private static final String BASE_URL = "http://localhost:8080/"; //"10.0.2.2:8080/"; // Tutorial notaði þetta að því
                                                              //  að hann notaði localhost.
 
     /**
@@ -53,10 +63,25 @@ public class NetworkManager {
     }
 
     /**
-     * Gets a recipe from the backend. TODO
+     * Gets a recipe from the backend.
      */
-    public void getRecipe() {
+    public void getRecipes() {
+        StringRequest request = new StringRequest(
+                Request.Method.GET, BASE_URL + "restRecipes", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<Recipe>>() {
+                }.getType();
+                List<Recipe> recipeBank = gson.fromJson(response, listType);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
+            }
+        }
+        );
     }
 
 }
