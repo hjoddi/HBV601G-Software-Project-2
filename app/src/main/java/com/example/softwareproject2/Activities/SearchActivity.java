@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
+import com.example.softwareproject2.Services.RecipeService;
 import com.example.softwareproject2.Services.TempBackendProvider;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class SearchActivity extends AppCompatActivity {
     // Instance variables.
     private Button mBtnBack, mBtnSearch;
     private EditText mSearchInput;
-    private List<Recipe> recipeBank;
+    private RecipeService recipeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,8 @@ public class SearchActivity extends AppCompatActivity {
         mBtnBack = findViewById(R.id.searchActivityBtnBack);
         mBtnSearch = findViewById(R.id.searchActivityBtnSearch);
 
-        // Initialize recipeBank. TODO: Decide if this stays or goes elsewhere.
-        TempBackendProvider TBP = TempBackendProvider.INSTANCE;
-        recipeBank = TBP.getRecipes();
+        // Connect RecipeService.
+        recipeService = new RecipeService();
 
         // Establish widget functionalities.
         mBtnBack.setOnClickListener(new View.OnClickListener() {
