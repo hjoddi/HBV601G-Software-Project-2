@@ -65,14 +65,20 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO: Move on to SearchResultActivity.
 
+
                 // Check if input empty.
                 String filterInput = mSearchInput.getText().toString();
+                /*
                 if (filterInput.equals("")) {
                     mFilteredRecipes = recipeService.allRecipes();
                 }
                 else {
                     mFilteredRecipes = recipeService.filteredRecipeList(filterInput);
                 }
+
+                 */
+
+                mFilteredRecipes = recipeService.filter(filterInput);
 
                 // Navigate to SearchResultActivity.
                 openSearchResultActivity();
