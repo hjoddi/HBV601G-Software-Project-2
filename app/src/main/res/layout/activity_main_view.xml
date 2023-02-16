@@ -10,11 +10,11 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
+        android:contentDescription="@string/app_logo_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lazy"
-        android:contentDescription="@string/app_logo_description" />
+        app:srcCompat="@drawable/lazy" />
 
     <TextView
         android:id="@+id/textView"
@@ -32,10 +32,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Recipes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnSearch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/mainActivityBtnExit"
@@ -44,6 +46,18 @@
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityBtnSearch" />
+
+    <Button
+        android:id="@+id/mainActivityBtnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/searchRecipes"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnExit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGetRecipes" />
 </androidx.constraintlayout.widget.ConstraintLayout>
