@@ -64,6 +64,7 @@ public class NetworkManager {
 
     /**
      * Gets a recipe from the backend. TODO: Fá til að virka.
+     * VANDAMÁL: Keyrir aldrei onResponse né onErrorResponse.
      */
     public void getRecipes(NetworkCallback<List<Recipe>> callback) {
         StringRequest request = new StringRequest(

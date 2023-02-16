@@ -19,15 +19,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private List<Recipe> recipeBank; // Temp?
+    private Button mBtnExit;
+    private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
 
     /**
      * This method is called when the view is activated.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Connect UI widgets.
         mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
-
+        mBtnExit = findViewById(R.id.mainActivityBtnExit);
 
         // Connect NetworkManager.
         NetworkManager networkManager = NetworkManager.getInstance(this);
@@ -58,11 +57,27 @@ public class MainActivity extends AppCompatActivity {
 
          */
 
+        // Establish widget functionalities.
+        mBtnExit.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Exits the application when button is pressed.
+             * @param v - The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                finishAndRemoveTask();
+            }
+        });
+
+
+
+        // Keyrist þegar ég ýti á 'GET RECIPES' takkann.
         // TODO: Fá þetta til að virka.
-        // Keyrir aldrei onSuccess né onFailure.
+        // Vandamál: Keyrir aldrei onSuccess né onFailure.
         mBtnGetRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("ÝTT Á TAKKA");
                 networkManager.getRecipes(new NetworkCallback<List<Recipe>>() {
                     @Override
                     public void onSuccess(List<Recipe> result) {
