@@ -17,6 +17,10 @@ import com.example.softwareproject2.Services.TempBackendProvider;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class manages the view where the user selects filters
+ *  to search recipes by.
+ */
 public class SearchActivity extends AppCompatActivity {
 
     // Instance variables.

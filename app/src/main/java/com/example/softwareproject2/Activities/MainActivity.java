@@ -17,13 +17,15 @@ import com.example.softwareproject2.R;
 import java.util.List;
 
 /**
- * View for the "front page" of the app; i.e. the first view when the app is opened.
+ * This class manages the view for the "front page" of the app; i.e. the first
+ *  view when the app is opened.
  */
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
     private Button mBtnExit, mBtnSearchRecipes;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
+                                     // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
 
     /**
      * This method is called when the view is activated.
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnExit = findViewById(R.id.mainActivityBtnExit);
         mBtnSearchRecipes = findViewById(R.id.mainActivityBtnSearch);
 
-        // Connect NetworkManager.
+        // Connect NetworkManager. TODO: Eyða þessu þegar networkign virkar
         NetworkManager networkManager = NetworkManager.getInstance(this);
 
         // Use NetworkManager to get recipes. TODO: Var svona í tutorial. Halda eða henda?
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Keyrist þegar ég ýti á 'GET RECIPES' takkann.
-        // TODO: Fá þetta til að virka.
+        // TODO: Fá þetta til að virka. Eyða þessu svo þegar networking virkar.
         // Vandamál: Keyrir aldrei onSuccess né onFailure.
         mBtnGetRecipes.setOnClickListener(new View.OnClickListener() {
             @Override

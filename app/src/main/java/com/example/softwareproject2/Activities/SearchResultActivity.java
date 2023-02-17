@@ -12,6 +12,10 @@ import com.example.softwareproject2.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class manages the view for the results of the user's search for
+ *  recipes.
+ */
 public class SearchResultActivity extends AppCompatActivity {
 
     // Instance variables.
