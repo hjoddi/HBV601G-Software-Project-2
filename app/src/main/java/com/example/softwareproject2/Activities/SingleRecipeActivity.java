@@ -50,7 +50,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
             mRecipeDescriptions.add("Comments: " + recipe.getComments().toString());
         }
 
-
         //      Create and apply the ArrayAdapter.
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, mRecipeDescriptions
