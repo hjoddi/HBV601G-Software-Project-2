@@ -2,8 +2,11 @@ package com.example.softwareproject2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.softwareproject2.Model.Recipe;
@@ -22,6 +25,7 @@ public class SearchResultActivity extends AppCompatActivity {
     List<Recipe> mFilteredRecipes; // The filtered recipes.
     ArrayList<String> mFilteredRecipesNames; // List of recipe names to display.
     private ListView mListView; // ListView that will display the recipes.
+    private Button mBtnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         // Connect UI widgets.
         mListView = findViewById(R.id.searchResultActivityListView);
+        mBtnBack = findViewById(R.id.searchResultActivityBtnBack);
 
         // Access bundled extras.
         mFilteredRecipes = (List<Recipe>) getIntent().getSerializableExtra("filteredRecipes");
@@ -47,5 +52,19 @@ public class SearchResultActivity extends AppCompatActivity {
                 this, android.R.layout.simple_list_item_1, mFilteredRecipesNames
         );
         mListView.setAdapter(arrayAdapter);
+
+        // Establish widget functionalities.
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSearchActivity();
+            }
+        });
+    }
+
+    public void openSearchActivity() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
