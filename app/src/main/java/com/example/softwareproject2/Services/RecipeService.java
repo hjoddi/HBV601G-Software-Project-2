@@ -135,11 +135,33 @@ public class RecipeService {
         return filteredRecipes;
     }
 
+    /**
+     * Returns the recipe whose ID matches a given long number.
+     * @param id - The id of the recipe to be returned.
+     * @return - The recipe corresponding to the given id.
+     */
     public Recipe findById(Long id) {
         Recipe r = null;
 
         for (int i = 0; i < mRecipeBank.size(); i++) {
             if (mRecipeBank.get(i).getId().equals(id)) {
+                r = mRecipeBank.get(i);
+            }
+        }
+
+        return r;
+    }
+
+    /**
+     * Returns a recipe whose name matches a given string.
+     * @param name - The name of the recipe to be returned.
+     * @return - The recipe corresponding to the given name.
+     */
+    public Recipe findByName(String name) {
+        Recipe r = null;
+
+        for (int i = 0; i < mRecipeBank.size(); i++) {
+            if (mRecipeBank.get(i).getName().equals(name)) {
                 r = mRecipeBank.get(i);
             }
         }

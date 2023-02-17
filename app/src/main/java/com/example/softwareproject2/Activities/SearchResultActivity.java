@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
+import com.example.softwareproject2.Services.RecipeService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class SearchResultActivity extends AppCompatActivity {
     // Instance variables.
     List<Recipe> mFilteredRecipes; // The filtered recipes.
     ArrayList<String> mFilteredRecipesNames; // List of recipe names to display.
+    private RecipeService mRecipeService;
     private ListView mListView; // ListView that will display the recipes.
     private Button mBtnBack;
 
@@ -34,6 +36,9 @@ public class SearchResultActivity extends AppCompatActivity {
 
         // Connect to layout.
         setContentView(R.layout.activity_search_result);
+
+        // Initialize RecipeService.
+        mRecipeService = new RecipeService();
 
         // Connect UI widgets.
         mListView = findViewById(R.id.searchResultActivityListView);
@@ -67,7 +72,9 @@ public class SearchResultActivity extends AppCompatActivity {
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
-             *
+             * Queries the RecipeService for the recipe selected by the user, and
+             *  calls the openSingleRecipeActivity method to navigate to the view
+             *  displaying the selected recipe.
              * @param parent The AdapterView where the click happened.
              * @param view The view within the AdapterView that was clicked (this
              *            will be a view provided by the adapter)
@@ -76,8 +83,8 @@ public class SearchResultActivity extends AppCompatActivity {
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                System.out.println(mFilteredRecipesNames.get(position));
+                Recipe r = mRecipeService.findByName(mFilteredRecipesNames.get(position));
+                openSingleRecipeActivity(r);
             }
         });
     }
@@ -89,5 +96,15 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Navigates to the SingleRecipeActivity.
+     * @param recipe - The recipe to be displayed in the SingleRecipeActivity.
+     */
+    public void openSingleRecipeActivity(Recipe recipe) {
+        Intent intent = new Intent(this, SingleRecipeActivity.class);
+        intent.putExtra("recipe", recipe);
+        startActivity(intent);
     }
 }
