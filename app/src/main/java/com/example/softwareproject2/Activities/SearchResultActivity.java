@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -55,13 +56,35 @@ public class SearchResultActivity extends AppCompatActivity {
 
         // Establish widget functionalities.
         mBtnBack.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Calls the openSearchActivity() function.
+             */
             @Override
             public void onClick(View v) {
                 openSearchActivity();
             }
         });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             *
+             * @param parent The AdapterView where the click happened.
+             * @param view The view within the AdapterView that was clicked (this
+             *            will be a view provided by the adapter)
+             * @param position The position of the view in the adapter.
+             * @param id The row id of the item that was clicked.
+             */
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                System.out.println(mFilteredRecipesNames.get(position));
+            }
+        });
     }
 
+    /**
+     * Navigates to the SearchActivity and finishes the current activity.
+     */
     public void openSearchActivity() {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);

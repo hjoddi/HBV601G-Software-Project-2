@@ -134,4 +134,16 @@ public class RecipeService {
 
         return filteredRecipes;
     }
+
+    public Recipe findById(Long id) {
+        Recipe r = null;
+
+        for (int i = 0; i < mRecipeBank.size(); i++) {
+            if (mRecipeBank.get(i).getId().equals(id)) {
+                r = mRecipeBank.get(i);
+            }
+        }
+
+        return r;
+    }
 }
