@@ -7,8 +7,14 @@
     tools:context=".ListViewRow">
 
     <ImageView
+        android:adjustViewBounds="true"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+
         android:id="@+id/imageIcon" />
     <TextView
         android:layout_width="wrap_content"

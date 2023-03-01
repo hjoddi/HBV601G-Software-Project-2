@@ -54,7 +54,8 @@ public class SearchResultActivity extends AppCompatActivity {
         // Populate mListView.
 
 /*
-        // WORKS //
+        //// THE OLD VERSION - WORKS BUT ONLY SHOWS TEXT AND NO IMAGES ////
+
         //      Gather the names of the filtered recipes.
         mFilteredRecipesNames = new ArrayList<>();
         for (int i = 0; i < mFilteredRecipes.size(); i++) {
@@ -68,27 +69,17 @@ public class SearchResultActivity extends AppCompatActivity {
 
         mListView.setAdapter(arrayAdapter);
 */
+
+        //// IN TESTING ////
         ArrayList<Integer> recipeImages = new ArrayList<>();
-        ArrayList<String> recipeList = new ArrayList<>();
+        ArrayList<String> recipeNameList = new ArrayList<>();
         for (Recipe rec:mFilteredRecipes) {
-            recipeList.add(rec.getName());
+            recipeNameList.add(rec.getName());
+            System.out.println(rec.getName());
             recipeImages.add(getResources().getIdentifier(rec.getImageName(),"drawable",getPackageName()));
         }
-
-        // TESTING //
-        //{R.drawable.porridge, R.drawable.spaghetti, R.drawable.chicken_noodles_stir_fry};
-        //String recipeList[] = {"Porridge", "Spaghetti", "Chicken Noodles Stir Fry"};
-        CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), recipeList, recipeImages);
+        CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), recipeNameList, recipeImages);
         mListView.setAdapter(customBaseAdapter);
-
-
-
-
-
-
-
-
-
 
 
         // Establish widget functionalities.
@@ -115,7 +106,9 @@ public class SearchResultActivity extends AppCompatActivity {
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recipe r = mRecipeService.findByName(mFilteredRecipesNames.get(position));
+                
+                //Recipe r = mRecipeService.findByName(mFilteredRecipesNames.get(position));
+                Recipe r = mRecipeService.findByName(recipeNameList.get(position));
                 openSingleRecipeActivity(r);
             }
         });
