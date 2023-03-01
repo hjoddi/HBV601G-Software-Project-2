@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.softwareproject2.CustomBaseAdapter;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.RecipeService;
@@ -30,6 +31,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private ListView mListView; // ListView that will display the recipes.
     private Button mBtnBack;
 
+    //FOR TESTING
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,9 @@ public class SearchResultActivity extends AppCompatActivity {
         mFilteredRecipes = (List<Recipe>) getIntent().getSerializableExtra("filteredRecipes");
 
         // Populate mListView.
+
+/*
+        // WORKS //
         //      Gather the names of the filtered recipes.
         mFilteredRecipesNames = new ArrayList<>();
         for (int i = 0; i < mFilteredRecipes.size(); i++) {
@@ -57,7 +64,26 @@ public class SearchResultActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, mFilteredRecipesNames
         );
+
+
         mListView.setAdapter(arrayAdapter);
+*/
+
+        // TESTING //
+        int recipeImages[] = {R.drawable.porridge, R.drawable.spaghetti, R.drawable.chicken_noodles_stir_fry};
+        String recipeList[] = {"Porridge", "Spaghetti", "Chicken Noodles Stir Fry"};
+        CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), recipeList, recipeImages);
+        mListView.setAdapter(customBaseAdapter);
+
+
+
+
+
+
+
+
+
+
 
         // Establish widget functionalities.
         mBtnBack.setOnClickListener(new View.OnClickListener() {
