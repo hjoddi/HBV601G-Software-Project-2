@@ -8,13 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CustomBaseAdapter extends BaseAdapter {
     Context context;
-    String listRecipes[];
-    int listImages[];
+    ArrayList<String> listRecipes;
+    ArrayList<Integer> listImages;
     LayoutInflater inflater;
 
-    public CustomBaseAdapter(Context ctx, String [] listRecipes, int[] listImages){
+    public CustomBaseAdapter(Context ctx, ArrayList<String> listRecipes, ArrayList<Integer> listImages){
         this.context = ctx;
         this.listRecipes = listRecipes;
         this.listImages = listImages;
@@ -23,7 +25,7 @@ public class CustomBaseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listRecipes.length;
+        return listRecipes.size();
     }
 
     @Override
@@ -41,8 +43,8 @@ public class CustomBaseAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.activity_list_view_row, null);
         TextView txtView = (TextView) convertView.findViewById(R.id.textView);
         ImageView recipeImage = (ImageView) convertView.findViewById(R.id.imageIcon);
-        txtView.setText(listRecipes[position]);
-        recipeImage.setImageResource(listImages[position]);
+        txtView.setText(listRecipes.get(position));
+        recipeImage.setImageResource(listImages.get(position));
         return convertView;
     }
 }

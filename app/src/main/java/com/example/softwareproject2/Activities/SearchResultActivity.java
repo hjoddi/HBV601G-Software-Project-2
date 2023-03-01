@@ -68,10 +68,16 @@ public class SearchResultActivity extends AppCompatActivity {
 
         mListView.setAdapter(arrayAdapter);
 */
+        ArrayList<Integer> recipeImages = new ArrayList<>();
+        ArrayList<String> recipeList = new ArrayList<>();
+        for (Recipe rec:mFilteredRecipes) {
+            recipeList.add(rec.getName());
+            recipeImages.add(getResources().getIdentifier(rec.getImageName(),"drawable",getPackageName()));
+        }
 
         // TESTING //
-        int recipeImages[] = {R.drawable.porridge, R.drawable.spaghetti, R.drawable.chicken_noodles_stir_fry};
-        String recipeList[] = {"Porridge", "Spaghetti", "Chicken Noodles Stir Fry"};
+        //{R.drawable.porridge, R.drawable.spaghetti, R.drawable.chicken_noodles_stir_fry};
+        //String recipeList[] = {"Porridge", "Spaghetti", "Chicken Noodles Stir Fry"};
         CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), recipeList, recipeImages);
         mListView.setAdapter(customBaseAdapter);
 
