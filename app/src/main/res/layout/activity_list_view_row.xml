@@ -14,12 +14,13 @@
         android:maxWidth="100dp"
         android:minWidth="100dp"
         android:minHeight="100dp"
-
         android:id="@+id/imageIcon" />
+
     <TextView
+        android:id="@+id/textView"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
         android:gravity="center"
         android:text="My Text" />
 </LinearLayout>
