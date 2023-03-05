@@ -11,4 +11,5 @@
     <string name="search">Search</string>
     <string name="exit">Exit</string>
     <string name="searchRecipes">Search Recipes</string>
+    <string name="login_page_title">Lazybones Login</string>
 </resources>

@@ -23,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Button mBtnExit, mBtnSearchRecipes;
+    private Button mBtnExit, mBtnSearchRecipes, mbtnLogin;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
         mBtnExit = findViewById(R.id.mainActivityBtnExit);
         mBtnSearchRecipes = findViewById(R.id.mainActivityBtnSearch);
+        mbtnLogin = findViewById(R.id.mainActivityBtnLogin);
 
         // Connect NetworkManager. TODO: Eyða þessu þegar networkign virkar
         NetworkManager networkManager = NetworkManager.getInstance(this);
@@ -84,6 +85,17 @@ public class MainActivity extends AppCompatActivity {
                 openSearchActivity();
             }
         });
+        mbtnLogin.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Calls the openSearchActivity() function.
+             * @param v - The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                openLoginActivity();
+            }
+        });
+
 
 
         // Keyrist þegar ég ýti á 'GET RECIPES' takkann.
@@ -114,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openSearchActivity() {
         Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+
+    public void openLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

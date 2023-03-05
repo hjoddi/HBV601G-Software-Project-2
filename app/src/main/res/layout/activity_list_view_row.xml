@@ -18,9 +18,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="My Text" />
+        android:text="My Text"
+        android:textSize="20dp" />
 </LinearLayout>

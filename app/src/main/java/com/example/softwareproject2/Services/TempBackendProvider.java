@@ -1,7 +1,9 @@
 package com.example.softwareproject2.Services;
 
 import com.example.softwareproject2.Model.Recipe;
+import com.example.softwareproject2.Model.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -15,11 +17,19 @@ public enum TempBackendProvider {
     // Instance variables.
     INSTANCE;
 
+    private ArrayList<User> userList;
+    private User loggedIn;
+
     /**
      * Get instance of TempBackendProvider.
      * @return - Instance of TempBackendProvider.
      */
     public TempBackendProvider getInstance(){
+        if(userList.isEmpty()){
+            User nr1 = new User("Arnar", "1234");
+            User nr2 = new User("Hjorvar", "1234");
+            userList.add(nr1); userList.add(nr2);
+        }
         return INSTANCE;
     }
 
@@ -70,8 +80,35 @@ public enum TempBackendProvider {
         r8.setId(8L);
 
         // Return list of recipes.
-        Recipe[] recipesArray = {r1, r2, r3, r4, r5, r6, r7, r8};
+        Recipe[] recipesArray = {r1, r2, r3, r4, r5, r6, r7, r8,r8,r8,r8,r8,r8};
         List<Recipe> recipes = Arrays.asList(recipesArray);
         return recipes;
     }
+
+
+    // BEING WORKED ON //
+
+    public ArrayList<User> getUsers(){
+        return userList;
+    }
+    public int logIn(String user, String pw){
+        if(loggedIn != null){
+            return -1;
+        }
+        for (int i = 0; i < userList.size(); i++) {
+            if((userList.get(i).getPassword() == pw) && (userList.get(i).getUsername() == user)){
+                loggedIn = userList.get(i);
+                return 1;
+            }
+        }
+        return -1;
+    }
+
+    public int logOut(){
+        if(loggedIn != null){
+            loggedIn = null;
+        }
+        return 1;
+    }
+
 }
