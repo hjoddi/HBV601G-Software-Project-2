@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Networking.NetworkCallback;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
     private Button mBtnExit, mBtnSearchRecipes, mbtnLogin, mbtnLogout;
+    private TextView mTextViewGreeting;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
 
@@ -48,16 +50,20 @@ public class MainActivity extends AppCompatActivity {
         mBtnSearchRecipes = findViewById(R.id.mainActivityBtnSearch);
         mbtnLogin = findViewById(R.id.mainActivityBtnLogin);
         mbtnLogout = findViewById(R.id.mainActivityBtnLogout);
+        mTextViewGreeting = findViewById(R.id.mainActivityTextViewGreeting);
 
         // Show login button if not logged in.
         if(backendInstance.getLoggedIn()==null){
             mbtnLogout.setVisibility(View.GONE);
             mbtnLogin.setVisibility(View.VISIBLE);
+            mTextViewGreeting.setVisibility(View.GONE);
 
         }
         else{
             mbtnLogout.setVisibility(View.VISIBLE);
             mbtnLogin.setVisibility(View.GONE);
+            mTextViewGreeting.setText("Greetings " + backendInstance.getLoggedIn().getUsername() + "!");
+            mTextViewGreeting.setVisibility(View.VISIBLE);
         }
 
 
