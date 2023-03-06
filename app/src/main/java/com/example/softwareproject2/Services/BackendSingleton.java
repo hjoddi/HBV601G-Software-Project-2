@@ -12,14 +12,13 @@ import java.util.List;
  * Temporary class that provides data which will ultimately
  *  be provided by the NetworkManager and RestAPI.
  */
-public class backendSingleton {
+public class BackendSingleton {
 
-    private static final backendSingleton instance = new backendSingleton();
+    private static final BackendSingleton instance = new BackendSingleton();
 
     private ArrayList<User> userList;
     private User loggedIn;
-
-    private backendSingleton() {
+    private BackendSingleton() {
         if(userList == null){
             userList = new ArrayList<>();
             User nr1 = new User("Arnar", "1234");
@@ -28,11 +27,21 @@ public class backendSingleton {
         }
     }
 
+    // Who is logged in getter/setter.
+    public User getLoggedIn() {
+        return loggedIn;
+    }
+    public void setLoggedIn(String user, String pass) {
+        User current = new User(user, pass);
+        this.loggedIn = current;
+    }
+
+
     /**
-     * Get instance of TempBackendProvider.
+     * Get instance of backendSingleton.
      * @return - Instance of TempBackendProvider.
      */
-    public static backendSingleton getInstance(){
+    public static BackendSingleton getInstance(){
         return instance;
     }
 
@@ -99,7 +108,7 @@ public class backendSingleton {
             return -1;
         }
         for (int i = 0; i < userList.size(); i++) {
-            if((userList.get(i).getPassword() == pw) && (userList.get(i).getUsername() == user)){
+            if((userList.get(i).getPassword().equals(pw)) && (userList.get(i).getUsername().equals(user))){
                 loggedIn = userList.get(i);
                 return 1;
             }
@@ -108,6 +117,7 @@ public class backendSingleton {
     }
 
     public int logOut(){
+        System.out.println("Attempted to log out.");
         if(loggedIn != null){
             loggedIn = null;
         }

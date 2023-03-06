@@ -13,6 +13,7 @@ import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Networking.NetworkCallback;
 import com.example.softwareproject2.Networking.NetworkManager;
 import com.example.softwareproject2.R;
+import com.example.softwareproject2.Services.BackendSingleton;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Button mBtnExit, mBtnSearchRecipes, mbtnLogin;
+    private Button mBtnExit, mBtnSearchRecipes, mbtnLogin, mbtnLogout;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
 
@@ -38,11 +39,29 @@ public class MainActivity extends AppCompatActivity {
         // Connect to layout.
         setContentView(R.layout.activity_main_view);
 
+        // Connect to singleton backend
+        BackendSingleton backendInstance = BackendSingleton.getInstance();
+
         // Connect UI widgets.
         mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
         mBtnExit = findViewById(R.id.mainActivityBtnExit);
         mBtnSearchRecipes = findViewById(R.id.mainActivityBtnSearch);
         mbtnLogin = findViewById(R.id.mainActivityBtnLogin);
+        mbtnLogout = findViewById(R.id.mainActivityBtnLogout);
+
+        // Show login button if not logged in.
+        if(backendInstance.getLoggedIn()==null){
+            mbtnLogout.setVisibility(View.GONE);
+            mbtnLogin.setVisibility(View.VISIBLE);
+
+        }
+        else{
+            mbtnLogout.setVisibility(View.VISIBLE);
+            mbtnLogin.setVisibility(View.GONE);
+        }
+
+
+
 
         // Connect NetworkManager. TODO: Eyða þessu þegar networkign virkar
         NetworkManager networkManager = NetworkManager.getInstance(this);
@@ -65,6 +84,22 @@ public class MainActivity extends AppCompatActivity {
          */
 
         // Establish widget functionalities.
+
+        mbtnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backendInstance.logOut();
+                openMainActivity();
+            }
+        });
+
+        mbtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLoginActivity();
+            }
+        });
+
         mBtnExit.setOnClickListener(new View.OnClickListener() {
             /**
              * Exits the application when button is pressed.
@@ -85,16 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 openSearchActivity();
             }
         });
-        mbtnLogin.setOnClickListener(new View.OnClickListener() {
-            /**
-             * Calls the openSearchActivity() function.
-             * @param v - The view that was clicked.
-             */
-            @Override
-            public void onClick(View v) {
-                openLoginActivity();
-            }
-        });
+
 
 
 
@@ -131,6 +157,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

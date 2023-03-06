@@ -1,14 +1,14 @@
 package com.example.softwareproject2.Activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.softwareproject2.R;
+import com.example.softwareproject2.Services.BackendSingleton;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.softwareproject2.R;
-import com.example.softwareproject2.Services.backendSingleton;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -43,19 +43,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 // Get the fake backend
-                backendSingleton backend = backendSingleton.getInstance();
+                BackendSingleton backend = BackendSingleton.getInstance();
                 // Try to log in
                 String usr = mEditTextUsername.getText().toString();
                 String pw = mEditTextPassword.getText().toString();
                 if(backend.logIn(usr,pw)==1){
-                    finish();
-                }
-                else{
-                    finish();
+                    backend.setLoggedIn(usr,pw);
+                    openMainActivity();
                 }
 
             }
         });
 
+    }
+
+    private void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
