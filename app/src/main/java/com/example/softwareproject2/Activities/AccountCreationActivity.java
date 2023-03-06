@@ -1,25 +1,21 @@
 package com.example.softwareproject2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import java.util.ArrayList;
 
+public class AccountCreationActivity extends AppCompatActivity {
 
-public class LoginActivity extends AppCompatActivity {
-
-    private Button mBtnExit, mBtnLogin, mBtnCreateAccount;
+    private Button mBtnBack, mBtnCreateAccount;
     private EditText mEditTextUsername, mEditTextPassword;
+    private TextView mTextViewUsernameTaken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +23,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Connect to layout.
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_account_creation_page);
 
         // Connect UI widgets.
-        mBtnExit = findViewById(R.id.loginActivityBtnBack);
-        mBtnLogin = findViewById(R.id.loginActivityBtnLogin);
-        mEditTextUsername = findViewById(R.id.loginActivityTextUsername);
-        mEditTextPassword = findViewById(R.id.loginActivityTextPassword);
-        mBtnCreateAccount = findViewById(R.id.loginActivityBtnCreateAccount);
+        mBtnBack = findViewById(R.id.AccountCreationActivityBtnBack);
+        mBtnCreateAccount = findViewById(R.id.AccountCreationActivityBtnCreateAccount);
+        mEditTextUsername = findViewById(R.id.AccountCreationActivityTextUsername);
+        mEditTextPassword = findViewById(R.id.AccountCreationActivityTextPassword);
+        mTextViewUsernameTaken = findViewById(R.id.AccountCreationActivityTextViewUsernameTakenError);
 
 
-        mBtnExit.setOnClickListener(new View.OnClickListener(){
+        // Hide UI error text
+        mTextViewUsernameTaken.setVisibility(View.GONE);
+
+        mBtnBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        mBtnLogin.setOnClickListener(new View.OnClickListener(){
+        mBtnCreateAccount.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 // Get the fake backend
@@ -52,32 +51,23 @@ public class LoginActivity extends AppCompatActivity {
                 // Try to log in
                 String usr = mEditTextUsername.getText().toString();
                 String pw = mEditTextPassword.getText().toString();
-                if(backend.logIn(usr,pw)==1){
-                    backend.setLoggedIn(usr,pw);
+                if(backend.isValidUsername(usr)){
+                    backend.setLoggedIn(usr, pw);
+                    backend.addUser(usr, pw);
                     openMainActivity();
+                }
+                else{
+                    mTextViewUsernameTaken.setVisibility(View.VISIBLE);
                 }
 
             }
         });
-
-        mBtnCreateAccount.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openAccountCreationActivity();
-            }
-        });
-
 
     }
 
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-    private void openAccountCreationActivity() {
-        Intent intent = new Intent(this, AccountCreationActivity.class);
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

@@ -18,6 +18,8 @@ public class BackendSingleton {
 
     private ArrayList<User> userList;
     private User loggedIn;
+
+    // Constructor with example users already created.
     private BackendSingleton() {
         if(userList == null){
             userList = new ArrayList<>();
@@ -51,7 +53,6 @@ public class BackendSingleton {
      * @return - recipes: List of all recipes.
      */
     public List<Recipe> getRecipes() {
-
         // Populate list.
         HashSet<String> ingredients = new HashSet<>(); ingredients.add("Rice"); ingredients.add("Milk"); ingredients.add("Raisins");
         Recipe r1 = new Recipe("Porridge", ingredients, "Add small amount of water and bring it to a boil. " +
@@ -122,6 +123,21 @@ public class BackendSingleton {
             loggedIn = null;
         }
         return 1;
+    }
+
+    public Boolean isValidUsername(String userName){
+
+        for (User usr:userList){
+            if(usr.getUsername().equals(userName)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void addUser(String userName, String password){
+        User current = new User(userName, password);
+        userList.add(current);
     }
 
 }

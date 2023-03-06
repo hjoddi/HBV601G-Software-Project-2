@@ -12,4 +12,5 @@
     <string name="exit">Exit</string>
     <string name="searchRecipes">Search Recipes</string>
     <string name="login_page_title">Lazybones Login</string>
+    <string name="account_creation_page_title">Lazybones Account Creation</string>
 </resources>

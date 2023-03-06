@@ -27,6 +27,8 @@
         <activity
             android:name=".Activities.SearchActivity"
             android:exported="false" />
+        <activity android:name=".Activities.AccountCreationActivity"
+            android:exported="false" />
         <activity android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity

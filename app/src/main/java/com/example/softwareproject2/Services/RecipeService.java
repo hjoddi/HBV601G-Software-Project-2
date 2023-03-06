@@ -21,8 +21,10 @@ public class RecipeService {
      * Constructor.
      */
     public RecipeService() {
-        TempBackendProvider TBP = TempBackendProvider.INSTANCE;
-        this.mRecipeBank = TBP.getRecipes();
+        BackendSingleton backend = BackendSingleton.getInstance();
+        this.mRecipeBank = backend.getRecipes();
+/*      TempBackendProvider TBP = TempBackendProvider.INSTANCE;
+        this.mRecipeBank = TBP.getRecipes();*/
     }
 
     public List<Recipe> allRecipes() {

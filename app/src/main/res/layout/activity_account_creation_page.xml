@@ -21,17 +21,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="@string/login_page_title"
-        android:textSize="34sp"
+        android:text="@string/account_creation_page_title"
+        android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/loginActivityTextUsername"
+        app:layout_constraintBottom_toTopOf="@+id/AccountCreationActivityTextUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/loginActivityTextUsername"
+        android:id="@+id/AccountCreationActivityTextUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="188dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/loginActivityTextPassword"
+        android:id="@+id/AccountCreationActivityTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -53,21 +53,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivityTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/AccountCreationActivityTextUsername" />
 
     <Button
-        android:id="@+id/loginActivityBtnLogin"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:text="Login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivityTextPassword" />
-
-    <Button
-        android:id="@+id/loginActivityBtnBack"
+        android:id="@+id/AccountCreationActivityBtnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
@@ -75,18 +64,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivityBtnCreateAccount"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/AccountCreationActivityBtnCreateAccount"
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
-        android:id="@+id/loginActivityBtnCreateAccount"
+        android:id="@+id/AccountCreationActivityBtnCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="88dp"
         android:text="Create Account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivityBtnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/AccountCreationActivityTextPassword" />
+
+    <TextView
+        android:id="@+id/AccountCreationActivityTextViewUsernameTakenError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invalid username, please choose another."
+        app:layout_constraintBottom_toTopOf="@+id/AccountCreationActivityBtnCreateAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AccountCreationActivityTextPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
