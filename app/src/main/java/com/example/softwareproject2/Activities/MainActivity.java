@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         BackendSingleton backendInstance = BackendSingleton.getInstance();
 
         // Connect UI widgets.
-        mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
+        //mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
         mBtnExit = findViewById(R.id.mainActivityBtnExit);
         mBtnSearchRecipes = findViewById(R.id.mainActivityBtnSearch);
         mbtnLogin = findViewById(R.id.mainActivityBtnLogin);
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // Keyrist þegar ég ýti á 'GET RECIPES' takkann.
+/*        // Keyrist þegar ég ýti á 'GET RECIPES' takkann.
         // TODO: Fá þetta til að virka. Eyða þessu svo þegar networking virkar.
         // Vandamál: Keyrir aldrei onSuccess né onFailure.
         mBtnGetRecipes.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
     }
 
     /**

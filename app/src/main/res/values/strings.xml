@@ -13,4 +13,5 @@
     <string name="searchRecipes">Search Recipes</string>
     <string name="login_page_title">Lazybones Login</string>
     <string name="account_creation_page_title">Lazybones Account Creation</string>
+    <string name="Search_page_title">Lazybone Search</string>
 </resources>

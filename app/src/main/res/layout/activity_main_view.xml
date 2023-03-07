@@ -28,49 +28,38 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
-        android:id="@+id/btnGetRecipes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:text="Get Recipes"
-        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <Button
         android:id="@+id/mainActivityBtnExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivityBtnSearch" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
     <Button
         android:id="@+id/mainActivityBtnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/searchRecipes"
-        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnExit"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGetRecipes" />
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityTextViewGreeting"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/mainActivityBtnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="340dp"
         android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/btnGetRecipes"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnExit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="1.0" />
@@ -80,11 +69,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log out"
-        app:layout_constraintBottom_toTopOf="@+id/btnGetRecipes"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBtnExit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -97,5 +86,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintVertical_bias="0.053" />
 </androidx.constraintlayout.widget.ConstraintLayout>
