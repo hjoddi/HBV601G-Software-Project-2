@@ -70,7 +70,6 @@ public class SearchResultActivity extends AppCompatActivity {
         mListView.setAdapter(arrayAdapter);
 */
 
-        //// IN TESTING ////
         ArrayList<Integer> recipeImages = new ArrayList<>();
         ArrayList<String> recipeNameList = new ArrayList<>();
         for (Recipe rec:mFilteredRecipes) {

@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
-
-import java.util.ArrayList;
+import com.example.softwareproject2.Services.BackendSingleton;
 
 /**
  * This class manages the view displaying information about a specific
@@ -20,17 +19,27 @@ import java.util.ArrayList;
 public class SingleRecipeActivity extends AppCompatActivity {
 
     // Instance variables.
+    private ImageView mImageViewRecipeImage;
     private Recipe recipe;
-    private ArrayList<String> mRecipeDescriptions;
-    private ListView mListView;
     private Button mBtnBack;
-
+    private TextView mTextViewRecipeName, mTextViewRecipeInstructions, getmTextViewRecipeIngredients;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Connect to layout.
         setContentView(R.layout.activity_single_recipe);
+
+        // Connect UI widgets.
+        mBtnBack = findViewById(R.id.singleRecipeActivityBtnBack);
+        mImageViewRecipeImage = findViewById(R.id.singleRecipeActivityImageViewRecipe);
+        mTextViewRecipeName = findViewById(R.id.singleRecipeActivityTextVtiewRecipeName);
+        mTextViewRecipeInstructions = findViewById(R.id.singleRecipeActivityTextViewRecipeInstructions);
+        getmTextViewRecipeIngredients = findViewById(R.id.singleRecipeActivityTextViewRecipeIngredients);
+
+
+        /*
+        ////Old listview version. ////
 
         // Access bundled extras.
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
@@ -55,8 +64,34 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 this, android.R.layout.simple_list_item_1, mRecipeDescriptions
         );
         mListView.setAdapter(arrayAdapter);
+         */
+
+
 
         // Establish widget functionalities.
+
+        // Access bundled extras and (fake) backend.
+        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        BackendSingleton backend = BackendSingleton.getInstance();
+
+
+        // Set image
+        mImageViewRecipeImage.setImageResource(getResources().getIdentifier(recipe.getImageName(),"drawable",getPackageName()));
+
+        // Set name
+        mTextViewRecipeName.setText(recipe.getName());
+
+        // Set ingredients
+        String ingredientsString = "";
+        for (String s: recipe.getIngredients()){
+            ingredientsString = ingredientsString + "•" + s + "\n";
+        }
+        ingredientsString = ingredientsString.substring(0,ingredientsString.length()-1); // remove last newline
+        getmTextViewRecipeIngredients.setText(ingredientsString);
+
+        // Set instructions
+        mTextViewRecipeInstructions.setText(recipe.getInstructions());
+
         mBtnBack.setOnClickListener(new View.OnClickListener() {
             /**
              * Closes this activity, returning to the search

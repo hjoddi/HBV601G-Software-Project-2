@@ -13,9 +13,7 @@ import java.util.List;
  *  be provided by the NetworkManager and RestAPI.
  */
 public class BackendSingleton {
-
     private static final BackendSingleton instance = new BackendSingleton();
-
     private ArrayList<User> userList;
     private User loggedIn;
 
@@ -93,7 +91,7 @@ public class BackendSingleton {
         r8.setId(8L);
 
         // Return list of recipes.
-        Recipe[] recipesArray = {r1, r2, r3, r4, r5, r6, r7, r8,r8,r8,r8,r8,r8};
+        Recipe[] recipesArray = {r1, r2, r3, r4, r5, r6, r7, r8};
         List<Recipe> recipes = Arrays.asList(recipesArray);
         return recipes;
     }
@@ -126,7 +124,9 @@ public class BackendSingleton {
     }
 
     public Boolean isValidUsername(String userName){
-
+        if(userName.length()==0){
+            return false;
+        }
         for (User usr:userList){
             if(usr.getUsername().equals(userName)){
                 return false;

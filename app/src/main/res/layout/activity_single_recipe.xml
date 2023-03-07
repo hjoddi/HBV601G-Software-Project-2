@@ -6,22 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".Activities.SingleRecipeActivity">
 
-    <ListView
-        android:id="@+id/singleRecipeActivityListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/singleRecipeActivityBtnBack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/singleRecipeActivityBtnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <ImageView
+        android:id="@+id/singleRecipeActivityImageViewRecipe"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.103"
+        app:srcCompat="@drawable/placeholder" />
+
+    <TextView
+        android:id="@+id/singleRecipeActivityTextVtiewRecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="recipeName"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleRecipeActivityImageViewRecipe"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/singleRecipeActivityTextViewRecipeIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredients"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleRecipeActivityTextVtiewRecipeName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/singleRecipeActivityTextViewRecipeInstructions"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="Instructions"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleRecipeActivityTextViewRecipeIngredients"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
