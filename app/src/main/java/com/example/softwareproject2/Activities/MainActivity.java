@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
-import com.example.softwareproject2.Networking.NetworkCallback;
 import com.example.softwareproject2.Networking.NetworkManager;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
@@ -27,7 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Button mBtnExit, mBtnSearchRecipes, mbtnLogin, mbtnLogout;
+    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites;
     private TextView mTextViewGreeting;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
@@ -50,22 +49,25 @@ public class MainActivity extends AppCompatActivity {
         //mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
         mBtnExit = findViewById(R.id.mainActivityBtnExit);
         mBtnSearchRecipes = findViewById(R.id.mainActivityBtnSearch);
-        mbtnLogin = findViewById(R.id.mainActivityBtnLogin);
-        mbtnLogout = findViewById(R.id.mainActivityBtnLogout);
+        mBtnLogin = findViewById(R.id.mainActivityBtnLogin);
+        mBtnlogout = findViewById(R.id.mainActivityBtnLogout);
         mTextViewGreeting = findViewById(R.id.mainActivityTextViewGreeting);
+        mBtnFavourites = findViewById(R.id.mainActivityButtonFavourites);
 
         // Show login button if not logged in.
         if(backendInstance.getLoggedIn()==null){
-            mbtnLogout.setVisibility(View.GONE);
-            mbtnLogin.setVisibility(View.VISIBLE);
+            mBtnlogout.setVisibility(View.GONE);
+            mBtnLogin.setVisibility(View.VISIBLE);
             mTextViewGreeting.setVisibility(View.GONE);
+            mBtnFavourites.setVisibility(View.GONE);
 
         }
         else{
-            mbtnLogout.setVisibility(View.VISIBLE);
-            mbtnLogin.setVisibility(View.GONE);
+            mBtnlogout.setVisibility(View.VISIBLE);
+            mBtnLogin.setVisibility(View.GONE);
             mTextViewGreeting.setText("Greetings " + backendInstance.getLoggedIn().getUsername() + "!");
             mTextViewGreeting.setVisibility(View.VISIBLE);
+            mBtnFavourites.setVisibility(View.VISIBLE);
 
             ArrayList<User> backendUsers = backendInstance.getUsers();
             for(User usr:backendUsers){
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Establish widget functionalities.
 
-        mbtnLogout.setOnClickListener(new View.OnClickListener() {
+        mBtnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 backendInstance.logOut();
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mbtnLogin.setOnClickListener(new View.OnClickListener() {
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openLoginActivity();
@@ -130,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 finishAndRemoveTask();
             }
         });
+
         mBtnSearchRecipes.setOnClickListener(new View.OnClickListener() {
             /**
              * Calls the openSearchActivity() function.
@@ -139,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 openSearchActivity();
             }
+        });
+
+        mBtnFavourites.setOnClickListener(v -> {
+            openFavouritesActivity();
         });
 
 
@@ -177,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void openFavouritesActivity() {
+        Intent intent = new Intent(this, FavouritesActivity.class);
         startActivity(intent);
     }
 

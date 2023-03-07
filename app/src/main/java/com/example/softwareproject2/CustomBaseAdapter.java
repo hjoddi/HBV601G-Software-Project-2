@@ -40,7 +40,7 @@ public class CustomBaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.activity_list_view_row, null);
+        convertView = inflater.inflate(R.layout.activity_search_result_list_view_row, null);
         TextView txtView = (TextView) convertView.findViewById(R.id.textView);
         ImageView recipeImage = (ImageView) convertView.findViewById(R.id.imageIcon);
         txtView.setText(listRecipes.get(position));

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.RecipeService;
-import com.example.softwareproject2.Services.TempBackendProvider;
 
 import java.io.Serializable;
 import java.util.List;

@@ -7,6 +7,6 @@ public class ListViewRow extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_view_row);
+        setContentView(R.layout.activity_search_result_list_view_row);
     }
 }

@@ -11,14 +11,14 @@
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/searchResultActivityBtnBack"
+        app:layout_constraintBottom_toTopOf="@+id/favouritesActivityBtnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".Activities.FavouritesActivity">
 
         <ListView
-            android:id="@+id/searchResultActivityListView"
+            android:id="@+id/favouritesActivityListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/black"></ListView>
@@ -26,7 +26,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/searchResultActivityBtnBack"
+        android:id="@+id/favouritesActivityBtnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"

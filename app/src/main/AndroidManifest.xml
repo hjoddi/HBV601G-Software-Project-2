@@ -22,6 +22,9 @@
             android:name=".Activities.SingleRecipeActivity"
             android:exported="false" />
         <activity
+            android:name=".Activities.FavouritesActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.SearchResultActivity"
             android:exported="false" />
         <activity
