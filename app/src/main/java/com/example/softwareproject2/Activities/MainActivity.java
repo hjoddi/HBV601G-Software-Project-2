@@ -11,11 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
+import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.Networking.NetworkCallback;
 import com.example.softwareproject2.Networking.NetworkManager;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,6 +66,18 @@ public class MainActivity extends AppCompatActivity {
             mbtnLogin.setVisibility(View.GONE);
             mTextViewGreeting.setText("Greetings " + backendInstance.getLoggedIn().getUsername() + "!");
             mTextViewGreeting.setVisibility(View.VISIBLE);
+
+            ArrayList<User> backendUsers = backendInstance.getUsers();
+            for(User usr:backendUsers){
+                if(usr.getUsername().equals("Arnar")){
+                    System.out.println(usr.getFavoriteRecipes());
+                    System.out.println(usr.getFavoriteRecipes());
+                    System.out.println(usr.getFavoriteRecipes());
+                    System.out.println(usr.getFavoriteRecipes());
+
+                }
+            }
+
         }
 
 

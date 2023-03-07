@@ -15,7 +15,7 @@ import java.util.List;
 public class BackendSingleton {
     private static final BackendSingleton instance = new BackendSingleton();
     private ArrayList<User> userList;
-    private User loggedIn;
+    private String loggedIn;
 
     // Constructor with example users already created.
     private BackendSingleton() {
@@ -25,15 +25,22 @@ public class BackendSingleton {
             User nr2 = new User("Hjorvar", "1234");
             userList.add(nr1); userList.add(nr2);
         }
+
     }
 
     // Who is logged in getter/setter.
     public User getLoggedIn() {
-        return loggedIn;
+        for (User usr: userList) {
+            if(usr.getUsername().equals(loggedIn)){
+                return usr;
+            }
+        }
+        return null;
     }
     public void setLoggedIn(String user, String pass) {
         User current = new User(user, pass);
-        this.loggedIn = current;
+        userList.add(current);
+        this.loggedIn = user;
     }
 
 
@@ -108,7 +115,7 @@ public class BackendSingleton {
         }
         for (int i = 0; i < userList.size(); i++) {
             if((userList.get(i).getPassword().equals(pw)) && (userList.get(i).getUsername().equals(user))){
-                loggedIn = userList.get(i);
+                loggedIn = userList.get(i).getUsername();
                 return 1;
             }
         }
@@ -140,4 +147,21 @@ public class BackendSingleton {
         userList.add(current);
     }
 
+    public User getUser(String userName){
+        for (User usr:userList){
+            if(usr.getUsername().equals(userName)){
+                return usr;
+            }
+        }
+        return null;
+    }
+/*    public void updateUser(){
+        for(User usr:userList){
+            if(usr.getUsername().equals(loggedIn.getUsername())){
+                userList.remove(usr);
+                userList.add(loggedIn);
+                break;
+            }
+        }
+    }*/
 }

@@ -74,7 +74,7 @@ public class SearchResultActivity extends AppCompatActivity {
         ArrayList<String> recipeNameList = new ArrayList<>();
         for (Recipe rec:mFilteredRecipes) {
             recipeNameList.add(rec.getName());
-            System.out.println(rec.getName());
+            //System.out.println(rec.getName());
             recipeImages.add(getResources().getIdentifier(rec.getImageName(),"drawable",getPackageName()));
         }
         CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), recipeNameList, recipeImages);

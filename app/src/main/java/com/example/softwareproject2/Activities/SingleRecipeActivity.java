@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
+import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * This class manages the view displaying information about a specific
@@ -23,6 +29,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private Recipe recipe;
     private Button mBtnBack;
     private TextView mTextViewRecipeName, mTextViewRecipeInstructions, getmTextViewRecipeIngredients;
+    private CheckBox mCheckBoxFavourite;
+    private User loggedInUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +45,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         mTextViewRecipeName = findViewById(R.id.singleRecipeActivityTextVtiewRecipeName);
         mTextViewRecipeInstructions = findViewById(R.id.singleRecipeActivityTextViewRecipeInstructions);
         getmTextViewRecipeIngredients = findViewById(R.id.singleRecipeActivityTextViewRecipeIngredients);
+        mCheckBoxFavourite = findViewById(R.id.singleRecipeActivityCheckBoxFavourite);
 
 
         /*
@@ -68,12 +78,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
 
 
-        // Establish widget functionalities.
+        /** Establish widget functionalities. **/
 
         // Access bundled extras and (fake) backend.
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         BackendSingleton backend = BackendSingleton.getInstance();
-
 
         // Set image
         mImageViewRecipeImage.setImageResource(getResources().getIdentifier(recipe.getImageName(),"drawable",getPackageName()));
@@ -92,6 +101,36 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // Set instructions
         mTextViewRecipeInstructions.setText(recipe.getInstructions());
 
+        // Set favourite checkbox
+        User loggedInUser = backend.getLoggedIn();
+        if(loggedInUser==null){
+            mCheckBoxFavourite.setVisibility(View.GONE);
+        }else{
+            mCheckBoxFavourite.setVisibility(View.VISIBLE);
+            HashSet<String> loggedInFavourites = loggedInUser.getFavoriteRecipes();
+            if(loggedInFavourites.contains(recipe.getName())){
+                mCheckBoxFavourite.setChecked(true);
+            }
+        }
+
+        mCheckBoxFavourite.setOnClickListener(v -> {
+            if(mCheckBoxFavourite.isChecked()){
+                loggedInUser.addToFavoriteRecipes(recipe.getName());
+            }
+            else{
+                loggedInUser.removeFromFavouriteRecipes(recipe.getName());
+            }
+            //System.out.println(loggedInUser.getFavoriteRecipes().toString());
+
+            //backend.updateUser();
+        });
+
+
+
+
+
+
+
         mBtnBack.setOnClickListener(new View.OnClickListener() {
             /**
              * Closes this activity, returning to the search
@@ -104,4 +143,28 @@ public class SingleRecipeActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+/*        BackendSingleton backend = BackendSingleton.getInstance();
+        mCheckBoxFavourite = findViewById(R.id.singleRecipeActivityCheckBoxFavourite);*/
+/*        System.out.println(backend.getLoggedIn().getFavoriteRecipes());
+        System.out.println(backend.getLoggedIn().getFavoriteRecipes());
+        System.out.println(backend.getLoggedIn().getFavoriteRecipes());*/
+/*
+        String loggedInUserName = loggedInUser.getUsername();
+        ArrayList<User> currentUsersInBackend = backend.getUsers();
+        for (User usr:currentUsersInBackend) {
+            if(usr.getUsername().equals(loggedInUserName)){
+                if(usr.getFavoriteRecipes().contains(recipe.getName())){
+                    mCheckBoxFavourite.setChecked(true);
+                }
+            }
+        }*/
+
+    }
+
+
+
 }
