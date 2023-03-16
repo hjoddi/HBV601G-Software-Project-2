@@ -70,16 +70,6 @@ public class MainActivity extends AppCompatActivity {
             mBtnFavourites.setVisibility(View.VISIBLE);
 
             ArrayList<User> backendUsers = backendInstance.getUsers();
-            for(User usr:backendUsers){
-                if(usr.getUsername().equals("Arnar")){
-                    System.out.println(usr.getFavoriteRecipes());
-                    System.out.println(usr.getFavoriteRecipes());
-                    System.out.println(usr.getFavoriteRecipes());
-                    System.out.println(usr.getFavoriteRecipes());
-
-                }
-            }
-
         }
 
 

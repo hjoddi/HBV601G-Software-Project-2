@@ -1,9 +1,11 @@
-package com.example.softwareproject2;
+package com.example.softwareproject2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ListViewRow extends AppCompatActivity{
+import com.example.softwareproject2.R;
+
+public class ListViewRowActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
