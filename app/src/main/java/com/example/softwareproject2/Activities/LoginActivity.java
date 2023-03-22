@@ -15,7 +15,10 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-
+/**
+ * This class manages the view for the login process.
+ *
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private Button mBtnExit, mBtnLogin, mBtnCreateAccount;

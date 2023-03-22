@@ -1,6 +1,7 @@
 package com.example.softwareproject2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.HashSet;
  * This class manages the view displaying information about a specific
  *  recipe.
  */
-public class SingleRecipeActivity extends AppCompatActivity {
+public class SingleRecipeActivity extends FragmentActivity {
 
     // Instance variables.
     private ImageView mImageViewRecipeImage;

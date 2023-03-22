@@ -10,7 +10,9 @@ import com.example.softwareproject2.Services.BackendSingleton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
+/**
+ * This class manages the view for the creation of user accounts.
+ */
 public class AccountCreationActivity extends AppCompatActivity {
 
     private Button mBtnBack, mBtnCreateAccount;
@@ -31,7 +33,6 @@ public class AccountCreationActivity extends AppCompatActivity {
         mEditTextUsername = findViewById(R.id.AccountCreationActivityTextUsername);
         mEditTextPassword = findViewById(R.id.AccountCreationActivityTextPassword);
         mTextViewUsernameTaken = findViewById(R.id.AccountCreationActivityTextViewUsernameTakenError);
-
 
         // Hide UI error text
         mTextViewUsernameTaken.setVisibility(View.GONE);
