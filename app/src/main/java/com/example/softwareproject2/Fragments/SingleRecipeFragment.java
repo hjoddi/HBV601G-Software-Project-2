@@ -3,6 +3,8 @@ package com.example.softwareproject2.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.softwareproject2.Adapter;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
@@ -30,12 +33,13 @@ public class SingleRecipeFragment extends Fragment {
     private Recipe recipe;
     private User user;
     private TextView textViewRating;
-    private ListView listViewComments;
+    private RecyclerView recyclerViewComments;
     private int rating;
     private HashSet<String> comments;
     private ImageView mImageViewRecipeImage;
     private TextView mTextViewRecipeName, mTextViewRecipeInstructions, getmTextViewRecipeIngredients;
     private CheckBox mCheckBoxFavourite;
+    private Adapter mAdapter;
 
     public SingleRecipeFragment() {
         // Required empty public constructor
@@ -50,12 +54,12 @@ public class SingleRecipeFragment extends Fragment {
 
         // Connect UI widgets.
         textViewRating = view.findViewById(R.id.recipeFragmentRating);
-        listViewComments = view.findViewById(R.id.recipeFragmentCommentsListview);
         mImageViewRecipeImage = view.findViewById(R.id.recipeFragmentImageView);
         mTextViewRecipeName = view.findViewById(R.id.recipeFragmentRecipeName);
         mTextViewRecipeInstructions = view.findViewById(R.id.recipeFragmentInstructions);
         getmTextViewRecipeIngredients = view.findViewById(R.id.recipeFragmentIngredients);
         mCheckBoxFavourite = view.findViewById(R.id.recipeFragmentFavCheckbox);
+        recyclerViewComments = view.findViewById(R.id.recipeFragmentRecyclerView);
 
         // Get data bundle.
         Bundle data = getArguments();
@@ -115,25 +119,15 @@ public class SingleRecipeFragment extends Fragment {
                 //backend.updateUser();
             });
 
-
-
-
-
-
-
-
-
-
             // TODO: Replace these test comments with the commentsArray when testing is finished.
             ArrayList<String> test = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 30; i++) {
                 test.add("test" + Integer.toString(i));
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),
-                    android.R.layout.simple_list_item_1,
-                    test);
-            listViewComments.setAdapter(arrayAdapter);
+            recyclerViewComments.setLayoutManager(new LinearLayoutManager(this.getContext()));
+            mAdapter = new Adapter(test);
+            recyclerViewComments.setAdapter(mAdapter);
         }
 
         return view;
