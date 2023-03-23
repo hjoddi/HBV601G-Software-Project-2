@@ -97,6 +97,11 @@ public class BackendSingleton {
                 "mushroom_pasta");
         r8.setId(8L);
 
+        // TODO: remove this - Add a comment for DEV purposes.
+        HashSet<String> r8Comments = new HashSet<>();
+        r8Comments.add("Fantastic!");
+        r8.setComments(r8Comments);
+
         // Return list of recipes.
         Recipe[] recipesArray = {r1, r2, r3, r4, r5, r6, r7, r8};
         List<Recipe> recipes = Arrays.asList(recipesArray);
