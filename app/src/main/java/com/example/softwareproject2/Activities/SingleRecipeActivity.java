@@ -1,7 +1,10 @@
 package com.example.softwareproject2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.softwareproject2.Fragments.RecipeRatingsAndCommentsFragment;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
@@ -47,36 +51,6 @@ public class SingleRecipeActivity extends FragmentActivity {
         mTextViewRecipeInstructions = findViewById(R.id.singleRecipeActivityTextViewRecipeInstructions);
         getmTextViewRecipeIngredients = findViewById(R.id.singleRecipeActivityTextViewRecipeIngredients);
         mCheckBoxFavourite = findViewById(R.id.singleRecipeActivityCheckBoxFavourite);
-
-
-        /*
-        ////Old listview version. ////
-
-        // Access bundled extras.
-        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
-
-        // Connect UI widgets.
-        mListView = findViewById(R.id.singleRecipeActivityListView);
-        mBtnBack = findViewById(R.id.singleRecipeActivityBtnBack);
-
-        // Populate mListView.
-        //      Gather the strings describing the recipe.
-        mRecipeDescriptions = new ArrayList<>();
-        mRecipeDescriptions.add("Name: " + recipe.getName());
-        mRecipeDescriptions.add("Ingredients: " + recipe.getIngredients().toString());
-        mRecipeDescriptions.add("Instructions: " + recipe.getInstructions());
-        mRecipeDescriptions.add("Rating: " + Integer.toString(recipe.getRating()));
-        if (!recipe.getComments().isEmpty()) {
-            mRecipeDescriptions.add("Comments: " + recipe.getComments().toString());
-        }
-
-        //      Create and apply the ArrayAdapter.
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, mRecipeDescriptions
-        );
-        mListView.setAdapter(arrayAdapter);
-         */
-
 
 
         /** Establish widget functionalities. **/
@@ -127,7 +101,9 @@ public class SingleRecipeActivity extends FragmentActivity {
         });
 
 
-
+        // Connect Ratings and Comments fragment.
+        Fragment fragment = new RecipeRatingsAndCommentsFragment();
+        replaceFragment(fragment);
 
 
 
@@ -164,6 +140,30 @@ public class SingleRecipeActivity extends FragmentActivity {
             }
         }*/
 
+    }
+
+    /**
+     * Replaces the fragment displaying the recipe's rating and comments.
+     * @param fragment
+     */
+    private void replaceFragment(Fragment fragment) {
+
+        // Get recipe data to be displayed.
+        int rating = recipe.getRating();
+        HashSet<String> comments = recipe.getComments();
+
+        // Pass the recipe's rating and comments into the fragment.
+        Bundle data = new Bundle();
+        data.putInt("rating", rating);
+        data.putSerializable("comments", comments);
+        fragment.setArguments(data);
+
+        // Display the fragment.
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.singleRecipeActivityFragmentContainer, fragment);
+        fragmentTransaction.setReorderingAllowed(true);
+        fragmentTransaction.commit();
     }
 
 
