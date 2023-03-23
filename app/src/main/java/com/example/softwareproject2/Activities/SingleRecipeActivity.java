@@ -1,6 +1,5 @@
 package com.example.softwareproject2.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -9,19 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Checkable;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
-import com.example.softwareproject2.Fragments.RecipeRatingsAndCommentsFragment;
+import com.example.softwareproject2.Fragments.SingleRecipeFragment;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
-import com.example.softwareproject2.Services.BackendSingleton;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * This class manages the view displaying information about a specific
@@ -30,12 +22,16 @@ import java.util.HashSet;
 public class SingleRecipeActivity extends FragmentActivity {
 
     // Instance variables.
+    /*
     private ImageView mImageViewRecipeImage;
-    private Recipe recipe;
-    private Button mBtnBack;
     private TextView mTextViewRecipeName, mTextViewRecipeInstructions, getmTextViewRecipeIngredients;
     private CheckBox mCheckBoxFavourite;
+     */
+
     private User loggedInUser;
+    private Button mBtnBack;
+    private FrameLayout fragmentContainer;
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +42,22 @@ public class SingleRecipeActivity extends FragmentActivity {
 
         // Connect UI widgets.
         mBtnBack = findViewById(R.id.singleRecipeActivityBtnBack);
+        /*
         mImageViewRecipeImage = findViewById(R.id.singleRecipeActivityImageViewRecipe);
         mTextViewRecipeName = findViewById(R.id.singleRecipeActivityTextVtiewRecipeName);
         mTextViewRecipeInstructions = findViewById(R.id.singleRecipeActivityTextViewRecipeInstructions);
         getmTextViewRecipeIngredients = findViewById(R.id.singleRecipeActivityTextViewRecipeIngredients);
         mCheckBoxFavourite = findViewById(R.id.singleRecipeActivityCheckBoxFavourite);
+         */
+        fragmentContainer = findViewById(R.id.singleRecipeActivityFragmentContainer);
 
 
         /** Establish widget functionalities. **/
 
         // Access bundled extras and (fake) backend.
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+
+        /*
         BackendSingleton backend = BackendSingleton.getInstance();
 
         // Set image
@@ -99,10 +100,11 @@ public class SingleRecipeActivity extends FragmentActivity {
 
             //backend.updateUser();
         });
+         */
 
 
         // Connect Ratings and Comments fragment.
-        Fragment fragment = new RecipeRatingsAndCommentsFragment();
+        Fragment fragment = new SingleRecipeFragment();
         replaceFragment(fragment);
 
 
@@ -148,14 +150,10 @@ public class SingleRecipeActivity extends FragmentActivity {
      */
     private void replaceFragment(Fragment fragment) {
 
-        // Get recipe data to be displayed.
-        int rating = recipe.getRating();
-        HashSet<String> comments = recipe.getComments();
-
         // Pass the recipe's rating and comments into the fragment.
         Bundle data = new Bundle();
-        data.putInt("rating", rating);
-        data.putSerializable("comments", comments);
+        data.putSerializable("recipe", recipe);
+        int resources = getResources().getIdentifier(recipe.getImageName(),"drawable",getPackageName());
         fragment.setArguments(data);
 
         // Display the fragment.
