@@ -3,6 +3,8 @@ package com.example.softwareproject2.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.softwareproject2.Activities.SingleRecipeActivity;
 import com.example.softwareproject2.Adapter;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
@@ -40,6 +44,7 @@ public class SingleRecipeFragment extends Fragment {
     private TextView mTextViewRecipeName, mTextViewRecipeInstructions, getmTextViewRecipeIngredients;
     private CheckBox mCheckBoxFavourite;
     private Adapter mAdapter;
+    private RatingBar mRatingBar;
 
     public SingleRecipeFragment() {
         // Required empty public constructor
@@ -60,6 +65,7 @@ public class SingleRecipeFragment extends Fragment {
         getmTextViewRecipeIngredients = view.findViewById(R.id.recipeFragmentIngredients);
         mCheckBoxFavourite = view.findViewById(R.id.recipeFragmentFavCheckbox);
         recyclerViewComments = view.findViewById(R.id.recipeFragmentRecyclerView);
+        mRatingBar = view.findViewById(R.id.recipeFragmentRatingBar);
 
         // Get data bundle.
         Bundle data = getArguments();
@@ -76,7 +82,11 @@ public class SingleRecipeFragment extends Fragment {
             // Connect data to UI.
             textViewRating.setText(Integer.toString(rating));
 
+            // Access backend.
             BackendSingleton backend = BackendSingleton.getInstance();
+
+            // Configure rating bar.
+            mRatingBar.setRating(rating);
 
             // Set image
             mImageViewRecipeImage.setImageResource(getResources().getIdentifier(recipe.getImageName(),"drawable", getActivity().getPackageName()));
@@ -95,15 +105,22 @@ public class SingleRecipeFragment extends Fragment {
             // Set instructions
             mTextViewRecipeInstructions.setText(recipe.getInstructions());
 
-            // Set favourite checkbox
+            // Set favourite checkbox and fix rating bar if not logged in.
             User loggedInUser = backend.getLoggedIn();
             if(loggedInUser==null){
                 mCheckBoxFavourite.setVisibility(View.GONE);
+                mRatingBar.setIsIndicator(true);
             }else{
                 mCheckBoxFavourite.setVisibility(View.VISIBLE);
                 HashSet<String> loggedInFavourites = loggedInUser.getFavoriteRecipes();
                 if(loggedInFavourites.contains(recipe.getName())){
                     mCheckBoxFavourite.setChecked(true);
+                }
+                if (recipe.getRaters().contains(loggedInUser)) {
+                    mRatingBar.setIsIndicator(true);
+                }
+                else {
+                    mRatingBar.setIsIndicator(false);
                 }
             }
 
@@ -119,6 +136,15 @@ public class SingleRecipeFragment extends Fragment {
                 //backend.updateUser();
             });
 
+            mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float myRating, boolean fromUser) {
+                    backend.rateRecipe(recipe, loggedInUser, (int) myRating);
+
+                    refreshFragment();
+                }
+            });
+
             // TODO: Replace these test comments with the commentsArray when testing is finished.
             ArrayList<String> test = new ArrayList<>();
             for (int i = 0; i < 30; i++) {
@@ -131,5 +157,21 @@ public class SingleRecipeFragment extends Fragment {
         }
 
         return view;
+    }
+
+    /**
+     * Refreshes the fragment.
+     */
+    private void refreshFragment() {
+        Bundle args = new Bundle();
+        args.putSerializable("recipe", recipe);
+
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        SingleRecipeFragment newFragment = new SingleRecipeFragment();
+        newFragment.setArguments(args);
+        fragmentTransaction.replace(R.id.singleRecipeActivityFragmentContainer, newFragment);
+        fragmentTransaction.commit();
     }
 }

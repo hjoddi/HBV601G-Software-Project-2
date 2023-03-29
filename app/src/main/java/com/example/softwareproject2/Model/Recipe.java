@@ -33,6 +33,35 @@ public class Recipe implements Serializable {
 			System.out.println("DEBUG - !this.raters.contains(username)");
 			this.ratings.add(rating);
 			this.raters.add(username);
+			updateRatings();
+		}
+	}
+
+	/**
+	 * Updates the recipe's rating by averaging the list of ratings.
+	 */
+	public void updateRatings() {
+
+		int ratingSum = 0;
+		for (int i : ratings) {
+			ratingSum += i;
+		}
+
+		double ratingAvg = (double) ratingSum / ratings.size();
+		if (ratingAvg > 4.5) {
+			this.rating = 5;
+		}
+		else if (ratingAvg > 3.5) {
+			this.rating = 4;
+		}
+		else if (ratingAvg > 2.5) {
+			this.rating = 3;
+		}
+		else if (ratingAvg > 1.5) {
+			this.rating = 2;
+		}
+		else {
+			this.rating = 1;
 		}
 	}
 
