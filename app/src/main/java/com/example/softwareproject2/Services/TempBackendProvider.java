@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Temporary class that provides data which will ultimately
  *  be provided by the NetworkManager and RestAPI.
+ *  !DEPRECATED!
  */
 public enum TempBackendProvider {
 
