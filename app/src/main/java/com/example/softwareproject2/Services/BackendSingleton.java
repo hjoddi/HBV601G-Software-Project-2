@@ -210,4 +210,14 @@ public class BackendSingleton {
         }
         return r;
     }
+
+    /**
+     * Adds a comment to a recipe.
+     * TODO: Have this update the database as well, once RestAPI works.
+     * @param recipe Recipe to be rated.
+     * @param comment Comment to be added to recipe.
+     */
+    public void addComment(Recipe recipe, String comment) {
+        recipe.AddComment(comment);
+    }
 }

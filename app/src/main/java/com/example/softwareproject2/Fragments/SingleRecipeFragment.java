@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +25,8 @@ import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,6 +48,9 @@ public class SingleRecipeFragment extends Fragment {
     private CheckBox mCheckBoxFavourite;
     private Adapter mAdapter;
     private RatingBar mRatingBar;
+    private TextInputLayout mCustomCommentArea;
+    private Button mSubmitCommentButton;
+    private TextInputEditText mCustomComment;
 
     public SingleRecipeFragment() {
         // Required empty public constructor
@@ -66,6 +72,9 @@ public class SingleRecipeFragment extends Fragment {
         mCheckBoxFavourite = view.findViewById(R.id.recipeFragmentFavCheckbox);
         recyclerViewComments = view.findViewById(R.id.recipeFragmentRecyclerView);
         mRatingBar = view.findViewById(R.id.recipeFragmentRatingBar);
+        mCustomCommentArea = view.findViewById(R.id.singleRecipeFragmentCommentInputLayout);
+        mSubmitCommentButton = view.findViewById(R.id.singleRecipeFragmentCommentButton);
+        mCustomComment = view.findViewById(R.id.singleRecipeFragmentCustomComment);
 
         // Get data bundle.
         Bundle data = getArguments();
@@ -110,8 +119,11 @@ public class SingleRecipeFragment extends Fragment {
             if(loggedInUser==null){
                 mCheckBoxFavourite.setVisibility(View.GONE);
                 mRatingBar.setIsIndicator(true);
+                mCustomCommentArea.setVisibility(View.GONE);
+                mSubmitCommentButton.setVisibility(View.GONE);
             }else{
                 mCheckBoxFavourite.setVisibility(View.VISIBLE);
+                mSubmitCommentButton.setVisibility(View.VISIBLE);
                 HashSet<String> loggedInFavourites = loggedInUser.getFavoriteRecipes();
                 if(loggedInFavourites.contains(recipe.getName())){
                     mCheckBoxFavourite.setChecked(true);
@@ -145,6 +157,17 @@ public class SingleRecipeFragment extends Fragment {
                 }
             });
 
+            mSubmitCommentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mCustomComment.getText().toString() != "") {
+                        backend.addComment(recipe, mCustomComment.getText().toString());
+
+                        refreshFragment();
+                    }
+                }
+            });
+
             // TODO: Replace these test comments with the commentsArray when testing is finished.
             ArrayList<String> test = new ArrayList<>();
             for (int i = 0; i < 30; i++) {
@@ -152,7 +175,7 @@ public class SingleRecipeFragment extends Fragment {
             }
 
             recyclerViewComments.setLayoutManager(new LinearLayoutManager(this.getContext()));
-            mAdapter = new Adapter(test);
+            mAdapter = new Adapter(commentsArray);
             recyclerViewComments.setAdapter(mAdapter);
         }
 
