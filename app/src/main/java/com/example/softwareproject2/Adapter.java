@@ -1,5 +1,7 @@
 package com.example.softwareproject2;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +30,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String data = mData.get(position);
-        holder.bind(data);
+        String comment = mData.get(position);
+        holder.mTextView.setText(comment);
+        holder.mTextView.setTextSize(16); // set text size to 16sp
+        holder.mTextView.setTextColor(Color.BLACK); // set text color to black
+        holder.mTextView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL)); // set font to sans-serif
     }
 
     @Override
