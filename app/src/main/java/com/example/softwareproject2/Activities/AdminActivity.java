@@ -35,5 +35,17 @@ public class AdminActivity extends AppCompatActivity {
                 finish();
             }
         });
+        mBtnDeleteRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBackend.deleteRecipes();
+            }
+        });
+        mBtnDeleteUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBackend.deleteUsers();
+            }
+        });
     }
 }

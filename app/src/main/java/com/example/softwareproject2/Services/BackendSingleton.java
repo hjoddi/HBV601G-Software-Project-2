@@ -243,6 +243,13 @@ public class BackendSingleton {
      * Deletes all recipes.
      */
     public void deleteRecipes() {
+        recipesList = new ArrayList<>();
+    }
 
+    /**
+     * Deletes all users.
+     */
+    public void deleteUsers() {
+        userList = new ArrayList<>();
     }
 }

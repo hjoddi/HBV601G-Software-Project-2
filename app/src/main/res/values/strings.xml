@@ -16,7 +16,7 @@
     <string name="Search_page_title">Lazybone Search</string>
     <string name="main_menu">Main Menu</string>
     <!-- Admin strings -->
-    <string name="admin_delete_users">Delete Users</string>
-    <string name="admin_delete_recipes">Delete Recipes</string>
+    <string name="admin_delete_all_users">Delete All Users</string>
+    <string name="admin_delete_all_recipes">Delete All Recipes</string>
 
 </resources>
