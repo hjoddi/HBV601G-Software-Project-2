@@ -59,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
                     backend.setLoggedIn(usr,pw);
                     openMainActivity();
                 }
+                else if (backend.logIn(usr, pw) == 2) {
+                    openAdminActivity();
+                }
 
             }
         });
@@ -81,6 +84,11 @@ public class LoginActivity extends AppCompatActivity {
     private void openAccountCreationActivity() {
         Intent intent = new Intent(this, AccountCreationActivity.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void openAdminActivity() {
+        Intent intent = new Intent(this, AdminActivity.class);
         startActivity(intent);
     }
 }

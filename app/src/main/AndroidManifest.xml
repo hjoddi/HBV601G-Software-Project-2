@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ListViewRowActivity"
             android:exported="false" />
         <activity
@@ -30,15 +33,18 @@
         <activity
             android:name=".Activities.SearchActivity"
             android:exported="false" />
-        <activity android:name=".Activities.AccountCreationActivity"
+        <activity
+            android:name=".Activities.AccountCreationActivity"
             android:exported="false" />
-        <activity android:name=".Activities.LoginActivity"
+        <activity
+            android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

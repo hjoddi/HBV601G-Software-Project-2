@@ -17,6 +17,8 @@ public class BackendSingleton {
     private ArrayList<User> userList;
     private String loggedIn;
     private ArrayList<Recipe> recipesList;
+    private String adminUsername;
+    private String adminPassword;
 
     // Constructor with example users already created.
     private BackendSingleton() {
@@ -29,6 +31,8 @@ public class BackendSingleton {
         if (recipesList == null) {
             recipesList = new ArrayList<>();
         }
+        adminUsername = "admin";
+        adminPassword = "admin";
     }
 
     // Who is logged in getter/setter.
@@ -127,6 +131,9 @@ public class BackendSingleton {
         return userList;
     }
     public int logIn(String user, String pw){
+        if (user.equals(adminUsername) && pw.equals(adminPassword)) {
+            return 2;
+        }
         if(loggedIn != null){
             return -1;
         }
