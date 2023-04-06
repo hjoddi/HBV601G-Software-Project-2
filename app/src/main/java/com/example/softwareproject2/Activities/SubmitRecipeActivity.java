@@ -13,8 +13,9 @@ import com.example.softwareproject2.R;
 public class SubmitRecipeActivity extends AppCompatActivity {
 
     // Instance variables.
-    private Button mBtnIngredientAdd, mBtnIngredientRemove;
+    private Button mBtnIngredientAdd, mBtnIngredientRemove, mBtnBack;
     private LinearLayout mIngredientsLayout;
+    private int numEditTexts;   // Number of dynamically created EditTexts.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class SubmitRecipeActivity extends AppCompatActivity {
         mBtnIngredientAdd = findViewById(R.id.submitRecipeActivityBtnAdd);
         mBtnIngredientRemove = findViewById(R.id.submitRecipeActivityBtnRemove);
         mIngredientsLayout = findViewById(R.id.submitRecipeActivityIngredientLayout);
+        numEditTexts = 0;
+        mBtnBack = findViewById(R.id.submitRecipeActivityBtnBack);
 
         // Implement button functionalities.
         mBtnIngredientAdd.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +40,22 @@ public class SubmitRecipeActivity extends AppCompatActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
                 mIngredientsLayout.addView(newTextField);
+                numEditTexts++;
+            }
+        });
+        mBtnIngredientRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (numEditTexts > 0) {
+                    mIngredientsLayout.removeViewAt(mIngredientsLayout.getChildCount() - 1);
+                    numEditTexts--;
+                }
+            }
+        });
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
