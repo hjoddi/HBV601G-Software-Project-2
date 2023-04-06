@@ -26,7 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites;
+    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites, mBtnSubmitRecipe;
     private TextView mTextViewGreeting;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnlogout = findViewById(R.id.mainActivityBtnLogout);
         mTextViewGreeting = findViewById(R.id.mainActivityTextViewGreeting);
         mBtnFavourites = findViewById(R.id.mainActivityButtonFavourites);
+        mBtnSubmitRecipe = findViewById(R.id.mainActivityBtnSubmitRecipe);
 
         // Show login button if not logged in.
         if(backendInstance.getLoggedIn()==null){
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             mBtnLogin.setVisibility(View.VISIBLE);
             mTextViewGreeting.setVisibility(View.GONE);
             mBtnFavourites.setVisibility(View.GONE);
+            mBtnSubmitRecipe.setVisibility(View.GONE);
 
         }
         else{
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             mTextViewGreeting.setText("Greetings " + backendInstance.getLoggedIn().getUsername() + "!");
             mTextViewGreeting.setVisibility(View.VISIBLE);
             mBtnFavourites.setVisibility(View.VISIBLE);
+            mBtnSubmitRecipe.setVisibility(View.VISIBLE);
 
             ArrayList<User> backendUsers = backendInstance.getUsers();
         }
@@ -138,6 +141,13 @@ public class MainActivity extends AppCompatActivity {
             openFavouritesActivity();
         });
 
+        mBtnSubmitRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSubmitRecipeActivity();
+            }
+        });
+
 
 
 
@@ -185,6 +195,11 @@ public class MainActivity extends AppCompatActivity {
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void openSubmitRecipeActivity() {
+        Intent intent = new Intent(this, SubmitRecipeActivity.class);
         startActivity(intent);
     }
 

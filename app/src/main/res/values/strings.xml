@@ -34,5 +34,15 @@
     <string name="admin_feedback_noMatchingUsername">No user matching specified username.</string>
     <string name="admin_feedback_userDeletedSuccessfully">User deleted successfully.</string>
     <string name="admin_feedback_recipeDeletedSuccessfully">Recipe deleted successfully.</string>
+    <!-- Submit recipe strings -->
+    <string name="submit_recipe_name">Name</string>
+    <string name="submit_recipe_name_hint">Recipe name</string>
+    <string name="submit_recipe_instructions">Instructions</string>
+    <string name="submit_recipe_instructions_hint">Recipe instructions</string>
+    <string name="submit_recipe_ingredients">Ingredients</string>
+    <string name="submit_recipe_ingredients_add">Add</string>
+    <string name="submit_recipe_ingredients_remove">Remove</string>
+    <string name="submit_recipe_ingredients_submit">Submit</string>
+    <string name="submit_recipe_image_select">Select image</string>
 
 </resources>
