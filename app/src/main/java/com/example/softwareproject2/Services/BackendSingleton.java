@@ -280,4 +280,15 @@ public class BackendSingleton {
             return 1;
         }
     }
+
+    public int deleteRecipeByID(Long id) {
+        Recipe r = getRecipeById(id);
+        if (r == null) {
+            return 0;
+        }
+        else {
+            recipesList.remove(r);
+            return 1;
+        }
+    }
 }

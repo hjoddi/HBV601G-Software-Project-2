@@ -43,7 +43,7 @@
         android:text="@string/admin_delete_comments_on_recipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminActivityBtnDeleteUser" />
+        app:layout_constraintTop_toBottomOf="@+id/adminActivityBtnDeleteRecipe" />
 
     <TextView
         android:id="@+id/textView3"
@@ -99,4 +99,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/adminActivityBtnDeleteRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/admin_delete_recipe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminActivityBtnDeleteUser" />
 </androidx.constraintlayout.widget.ConstraintLayout>

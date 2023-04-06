@@ -16,7 +16,7 @@ public class AdminActivity extends AppCompatActivity {
 
     // Instance variables.
     private BackendSingleton mBackend;
-    private Button mBtnDeleteUsers, mBtnDeleteRecipes, mBtnDeleteUser, mBtnDeleteCommentsOnRecipe, mBtnMainMenu;
+    private Button mBtnDeleteUsers, mBtnDeleteRecipes, mBtnDeleteUser, mBtnDeleteCommentsOnRecipe, mBtnDeleteRecipe, mBtnMainMenu;
     private TextView mFeedbackTextView;
     private EditText mInputEditText;
 
@@ -36,6 +36,7 @@ public class AdminActivity extends AppCompatActivity {
         mBtnDeleteCommentsOnRecipe = findViewById(R.id.adminActivityBtnDeleteCommentsOnRecipe);
         mFeedbackTextView = findViewById(R.id.adminActivityFeedbackTextView);
         mInputEditText = findViewById(R.id.adminActivityEditText);
+        mBtnDeleteRecipe = findViewById(R.id.adminActivityBtnDeleteRecipe);
 
         // Button functionalities.
         mBtnMainMenu.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +110,36 @@ public class AdminActivity extends AppCompatActivity {
                     else {
                         mFeedbackTextView.setTextColor(Color.GREEN);
                         mFeedbackTextView.setText(getResources().getString(R.string.admin_feedback_userDeletedSuccessfully));
+                    }
+                }
+            }
+        });
+        mBtnDeleteRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInputEditText.getText().toString().equals("")) {
+                    mFeedbackTextView.setTextColor(Color.RED);
+                    mFeedbackTextView.setText(getResources().getString(
+                            R.string.admin_feedback_noRecipeID));
+                }
+                else {
+                    try {
+                        long ID = Long.parseLong(mInputEditText.getText().toString());
+                        int deleteRecipeByID = mBackend.deleteRecipeByID(ID);
+                        if (deleteRecipeByID == 0) {
+                            mFeedbackTextView.setText(getResources().getString(
+                                    R.string.admin_feedback_noRecipeMatchingID));
+                            mFeedbackTextView.setTextColor(Color.RED);
+                        }
+                        else if (deleteRecipeByID == 1) {
+                            mFeedbackTextView.setTextColor(Color.GREEN);
+                            mFeedbackTextView.setText(getResources().getString(
+                                    R.string.admin_feedback_recipeDeletedSuccessfully));
+                        }
+                    } catch (NumberFormatException e) {
+                        mFeedbackTextView.setText(getResources().getString(
+                                R.string.admin_feedback_recipeIDFormatError));
+                        mFeedbackTextView.setTextColor(Color.RED);
                     }
                 }
             }
