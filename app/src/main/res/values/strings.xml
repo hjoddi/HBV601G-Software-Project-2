@@ -18,5 +18,19 @@
     <!-- Admin strings -->
     <string name="admin_delete_all_users">Delete All Users</string>
     <string name="admin_delete_all_recipes">Delete All Recipes</string>
+    <string name="admin_delete_comments_on_recipe">Delete All Comments On Recipe</string>
+    <string name="admin_delete_user">Delete User</string>
+    <string name="admin_single_recipe_user_action">Actions On Single Recipe / User</string>
+    <string name="admin_all_recipes_users_actions">Actions On All Recipes / Users</string>
+    <string name="recipe_id_user_username">Recipe ID / Username</string>
+    <string name="admin_feedback_noRecipeID">Please specify recipe ID.</string>
+    <string name="admin_feedback_recipeIDFormatError">Please specify an appropriate recipe ID.</string>
+    <string name="admin_feedback_noRecipeMatchingID">No recipe matching specified ID.</string>
+    <string name="admin_feedback_commentsOnRecipeDeletedSuccessfully">Comments deleted successfully.</string>
+    <string name="admin_feedback_recipesDeletedSuccessfully">Recipes deleted successfully.</string>
+    <string name="admin_feedback_usersDeletedSuccessfully">Users deleted successfully.</string>
+    <string name="admin_feedback_noUsername">Please specify a username.</string>
+    <string name="admin_feedback_noMatchingUsername">No user matching specified username.</string>
+    <string name="admin_feedback_userDeletedSuccessfully">User deleted successfully.</string>
 
 </resources>

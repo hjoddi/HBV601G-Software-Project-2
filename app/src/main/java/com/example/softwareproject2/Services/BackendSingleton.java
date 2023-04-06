@@ -252,4 +252,32 @@ public class BackendSingleton {
     public void deleteUsers() {
         userList = new ArrayList<>();
     }
+
+    /**
+     * Deletes all comments on a specified recipe.
+     * @param id The id of the recipe whose comments are to be deleted.
+     * @return 0 if no recipe matching the given ID, 1 if comments on
+     *  recipe matching given ID successfully deleted.
+     */
+    public int deleteCommentsOnRecipeByID(Long id) {
+        Recipe r = getRecipeById(id);
+        if (r == null) {
+            return 0;
+        }
+        else {
+            r.setComments(new HashSet<>());
+            return 1;
+        }
+    }
+
+    public int deleteUserByUsername(String username) {
+        User user = getUser(username);
+        if (user == null) {
+            return 0;
+        }
+        else {
+            userList.remove(user);
+            return 1;
+        }
+    }
 }
