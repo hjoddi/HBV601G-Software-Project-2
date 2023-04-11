@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ public class SingleRecipeActivity extends FragmentActivity {
     private Button mBtnBack;
     private FrameLayout fragmentContainer;
     private Recipe recipe;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,11 @@ public class SingleRecipeActivity extends FragmentActivity {
 
         // Access bundled extras and (fake) backend.
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        try {
+            imageUri = (Uri) getIntent().getExtras().get("imageUri");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         /*
         BackendSingleton backend = BackendSingleton.getInstance();
@@ -153,7 +160,10 @@ public class SingleRecipeActivity extends FragmentActivity {
         // Pass the recipe's rating and comments into the fragment.
         Bundle data = new Bundle();
         data.putSerializable("recipe", recipe);
-        int resources = getResources().getIdentifier(recipe.getImageName(),"drawable",getPackageName());
+        if (imageUri != null) {
+            data.putParcelable("imageUri", imageUri);
+        }
+        //int resources = getResources().getIdentifier(recipe.getImageName(),"drawable",getPackageName());
         fragment.setArguments(data);
 
         // Display the fragment.

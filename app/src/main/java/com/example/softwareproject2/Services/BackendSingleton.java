@@ -291,4 +291,8 @@ public class BackendSingleton {
             return 1;
         }
     }
+
+    public void saveRecipe(Recipe r) {
+        recipesList.add(r);
+    }
 }

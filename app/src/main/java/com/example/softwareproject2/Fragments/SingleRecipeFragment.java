@@ -1,5 +1,6 @@
 package com.example.softwareproject2.Fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -98,7 +99,13 @@ public class SingleRecipeFragment extends Fragment {
             mRatingBar.setRating(rating);
 
             // Set image
-            mImageViewRecipeImage.setImageResource(getResources().getIdentifier(recipe.getImageName(),"drawable", getActivity().getPackageName()));
+            if (!recipe.getImageName().equals("customImage")){
+                mImageViewRecipeImage.setImageResource(getResources().getIdentifier(recipe.getImageName(),"drawable", getActivity().getPackageName()));
+            }
+            else {
+                Uri imageUri = data.getParcelable("imageUri");
+                mImageViewRecipeImage.setImageURI(imageUri);
+            }
 
             // Set name
             mTextViewRecipeName.setText(recipe.getName());
