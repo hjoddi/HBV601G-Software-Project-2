@@ -10,12 +10,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.Networking.NetworkManager;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +41,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites, mBtnSubmitRecipe;
+    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites, mBtnSubmitRecipe, mBtnREST;
     private TextView mTextViewGreeting;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
@@ -54,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         mTextViewGreeting = findViewById(R.id.mainActivityTextViewGreeting);
         mBtnFavourites = findViewById(R.id.mainActivityButtonFavourites);
         mBtnSubmitRecipe = findViewById(R.id.mainActivityBtnSubmitRecipe);
+        mBtnREST = findViewById(R.id.mainActivityBtnREST);
 
         // Show login button if not logged in.
         if(backendInstance.getLoggedIn()==null){
@@ -74,6 +90,36 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayList<User> backendUsers = backendInstance.getUsers();
         }
+
+
+
+
+
+
+
+        /***** REST CONTROLER FIKT *****/
+        mBtnREST.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restTest();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -147,10 +193,6 @@ public class MainActivity extends AppCompatActivity {
                 openSubmitRecipeActivity();
             }
         });
-
-
-
-
 /*        // Keyrist þegar ég ýti á 'GET RECIPES' takkann.
         // TODO: Fá þetta til að virka. Eyða þessu svo þegar networking virkar.
         // Vandamál: Keyrir aldrei onSuccess né onFailure.
@@ -173,6 +215,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    /***** REST CONTROLER FIKT *****/
+    public void restTest() {
+        String url = "http://10.0.2.2:8080/restRecipes";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String responseString = response.getString("");
+                            System.out.println(responseString);
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        });
+        requestQueue.add(request);
+    }
+
+
+
 
     /**
      * Navigates to SearchActivity.
