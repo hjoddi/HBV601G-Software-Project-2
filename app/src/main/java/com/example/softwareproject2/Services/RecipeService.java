@@ -1,5 +1,7 @@
 package com.example.softwareproject2.Services;
 
+import android.content.Context;
+
 import com.example.softwareproject2.Model.Recipe;
 
 import java.util.ArrayList;
@@ -20,9 +22,9 @@ public class RecipeService {
     /**
      * Constructor.
      */
-    public RecipeService() {
+    public RecipeService(Context ctx) {
         BackendSingleton backend = BackendSingleton.getInstance();
-        this.mRecipeBank = backend.getRecipes();
+        this.mRecipeBank = backend.getAllRecipesFromBackend(ctx);
 /*      TempBackendProvider TBP = TempBackendProvider.INSTANCE;
         this.mRecipeBank = TBP.getRecipes();*/
     }

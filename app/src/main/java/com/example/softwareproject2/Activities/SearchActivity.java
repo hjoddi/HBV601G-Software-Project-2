@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         mInputPrompt = findViewById(R.id.searchActivityInputPrompt);
 
         // Connect RecipeService.
-        recipeService = new RecipeService();
+        recipeService = new RecipeService(this);
 
         // Establish widget functionalities.
         mBtnBack.setOnClickListener(new View.OnClickListener() {

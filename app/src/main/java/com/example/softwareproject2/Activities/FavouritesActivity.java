@@ -49,7 +49,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
         // Populate View.
         // Connect RecipeService.
-        mRecipeService = new RecipeService();
+        mRecipeService = new RecipeService(this);
 
         /*
         //// THE OLD VERSION - WORKS BUT ONLY SHOWS TEXT AND NO IMAGES ////
@@ -73,7 +73,7 @@ public class FavouritesActivity extends AppCompatActivity {
         ArrayList<Integer> recipeImages = new ArrayList<>();
         ArrayList<String> recipeNameList = new ArrayList<>();
 
-        ArrayList<Recipe> allRecipes = new ArrayList<>(backend.getRecipes());
+        ArrayList<Recipe> allRecipes = new ArrayList<>(backend.getAllRecipesFromBackend(this));
         //ArrayList<Recipe> allRecipes = (ArrayList<Recipe>)backend.getRecipes();
         HashSet<String> loggedInFavourites = loggedInUser.getFavoriteRecipes();
         ArrayList<Recipe> filteredRecipes = new ArrayList<>();

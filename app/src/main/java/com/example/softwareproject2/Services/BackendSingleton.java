@@ -74,15 +74,19 @@ public class BackendSingleton {
     public static BackendSingleton getInstance(){
         return instance;
     }
+/*
 
+    */
     /**
      * Provides a list of pre-made recipes which temporarily
      *  represent the entire database of recipes from the backend.
      * @return - recipes: List of all recipes.
-     */
+     *//*
+
     public List<Recipe> getRecipes() {
         return recipesList;
     }
+    */
 
 
     /**
@@ -152,15 +156,30 @@ public class BackendSingleton {
         }*/
     }
 
+    public ArrayList<User> getAllUsersFromBackend(Context context){
+        String URL = "http://10.0.2.2:8080/restUsers";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                response -> {
+                    Gson gson = new Gson();
+                    userList = gson.fromJson(response, new TypeToken<ArrayList<User>>(){}.getType());
+
+                }, error -> {
+            System.out.println(error);
+        });
+        requestQueue.add(stringRequest);
+        return userList;
+    }
 
 
 
+/*
 
-
-    /**
+/**
      * Creates a list of pre-made recipes.
      * @return List of pre-made recipes.
-     */
+     *//*
+
     public ArrayList<Recipe> getPreMadeRecipeBank() {
 
         // Create recipes.
@@ -220,11 +239,12 @@ public class BackendSingleton {
 
         return preMadeRecipes;
     }
-
-
+*/
+/*
     public ArrayList<User> getUsers(){
         return userList;
     }
+    */
     public int logIn(String user, String pw){
         if (user.equals(adminUsername) && pw.equals(adminPassword)) {
             return 2;

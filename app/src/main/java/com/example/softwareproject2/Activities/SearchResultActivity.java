@@ -42,7 +42,7 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
         // Initialize RecipeService.
-        mRecipeService = new RecipeService();
+        mRecipeService = new RecipeService(this);
 
         // Connect UI widgets.
         mListView = findViewById(R.id.searchResultActivityListView);
