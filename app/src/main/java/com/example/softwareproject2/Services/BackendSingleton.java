@@ -2,6 +2,7 @@ package com.example.softwareproject2.Services;
 
 import android.content.Context;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -94,14 +95,42 @@ public class BackendSingleton {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 response -> {
                     Gson gson = new Gson();
-                    ArrayList<Recipe> recipesFromRest = gson.fromJson(response, new TypeToken<ArrayList<Recipe>>(){}.getType());
-                    recipesList = recipesFromRest;
+                    recipesList = gson.fromJson(response, new TypeToken<ArrayList<Recipe>>(){}.getType());
 
                 }, error -> {
             System.out.println(error);
         });
         requestQueue.add(stringRequest);
     }
+
+    public void updateRecipeInTheBackend(Context context, Recipe changedRecipe){
+        String URL = "http://10.0.2.2:8080/restUpdateRecipe";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(changedRecipe); // Convert the Recipe object to a JSON string
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                response -> {
+                    System.out.println(response);
+                }, error -> {
+            System.out.println(error);
+        }) {
+            @Override
+            public byte[] getBody(){
+                return requestBody.getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+
+
+
+
+
     /**
      * Creates a list of pre-made recipes.
      * @return List of pre-made recipes.
@@ -166,8 +195,6 @@ public class BackendSingleton {
         return preMadeRecipes;
     }
 
-
-    // BEING WORKED ON //
 
     public ArrayList<User> getUsers(){
         return userList;

@@ -40,6 +40,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -105,28 +106,9 @@ public class MainActivity extends AppCompatActivity {
         mBtnREST.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restTest();
+                restTestButton();
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // Connect NetworkManager. TODO: Eyða þessu þegar networkign virkar
         NetworkManager networkManager = NetworkManager.getInstance(this);
@@ -221,9 +203,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /***** REST CONTROLER FIKT *****/
-    public void restTest() {
-        //String url = "https://jsonplaceholder.typicode.com/posts/1";
-        String URL = "http://10.0.2.2:8080/restRecipes";
+    public void restTestButton() {
+        BackendSingleton backendInstance = BackendSingleton.getInstance();
+        HashSet<String> ingredients = new HashSet<>(); ingredients.add("Rice"); ingredients.add("Milk"); ingredients.add("Raisins");
+        Recipe r1 = new Recipe("Porridge", ingredients, "Add small amount of water and bring it to a boil. " +
+                "Then add the rice and milk and let it cook at low heat. Add raisings once it starts getting thicker.", "porridge");
+        r1.setId(1L);
+        backendInstance.updateRecipeInTheBackend(this, r1);
+/*        String URL = "http://10.0.2.2:8080/restRecipes";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 response -> {
@@ -234,8 +221,9 @@ public class MainActivity extends AppCompatActivity {
                 }, error -> {
                     System.out.println(error);
                 });
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);*/
     }
+
 
 
 
