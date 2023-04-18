@@ -14,19 +14,27 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.Networking.NetworkManager;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
+import com.example.softwareproject2.Services.RecipeService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Connect to singleton backend
         BackendSingleton backendInstance = BackendSingleton.getInstance();
+        backendInstance.getRecipesFromBackend(this);
 
         // Connect UI widgets.
         //mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
@@ -90,11 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayList<User> backendUsers = backendInstance.getUsers();
         }
-
-
-
-
-
 
 
         /***** REST CONTROLER FIKT *****/
@@ -218,26 +222,19 @@ public class MainActivity extends AppCompatActivity {
 
     /***** REST CONTROLER FIKT *****/
     public void restTest() {
-        String url = "http://10.0.2.2:8080/restRecipes";
+        //String url = "https://jsonplaceholder.typicode.com/posts/1";
+        String URL = "http://10.0.2.2:8080/restRecipes";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String responseString = response.getString("");
-                            System.out.println(responseString);
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
-        requestQueue.add(request);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                response -> {
+                    Gson gson = new Gson();
+                    ArrayList<Recipe> recipeList = gson.fromJson(response, new TypeToken<ArrayList<Recipe>>(){}.getType());
+                    BackendSingleton backendSingleton = BackendSingleton.getInstance();
+
+                }, error -> {
+                    System.out.println(error);
+                });
+        requestQueue.add(stringRequest);
     }
 
 

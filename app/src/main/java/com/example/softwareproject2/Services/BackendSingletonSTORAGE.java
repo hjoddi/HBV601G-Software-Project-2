@@ -1,36 +1,31 @@
+/*
+
 package com.example.softwareproject2.Services;
 
-import android.content.Context;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+*/
 /**
  * Temporary class that provides data which will ultimately
  *  be provided by the NetworkManager and RestAPI.
- */
-public class BackendSingleton {
-    private static final BackendSingleton instance = new BackendSingleton();
+ *//*
+
+public class BackendSingletonSTORAGE {
+    private static final BackendSingletonSTORAGE instance = new BackendSingletonSTORAGE();
     private ArrayList<User> userList;
     private String loggedIn;
     private ArrayList<Recipe> recipesList;
     private String adminUsername;
     private String adminPassword;
 
-
     // Constructor with example users already created.
-    private BackendSingleton() {
+    private BackendSingletonSTORAGE() {
         if(userList == null){
             userList = new ArrayList<>();
             User nr1 = new User("Arnar", "1234");
@@ -40,15 +35,12 @@ public class BackendSingleton {
         if (recipesList == null) {
             recipesList = new ArrayList<>();
         }
-
-            /*
-            if (recipesList.isEmpty()) {
+        if (recipesList.isEmpty()) {
             recipesList = getPreMadeRecipeBank();
-        }*/
+        }
         adminUsername = "admin";
         adminPassword = "admin";
     }
-
 
     // Who is logged in getter/setter.
     public User getLoggedIn() {
@@ -66,46 +58,33 @@ public class BackendSingleton {
     }
 
 
-    /**
+    */
+/**
      * Get instance of backendSingleton.
      * @return - Instance of TempBackendProvider.
-     */
-    public static BackendSingleton getInstance(){
+     *//*
+
+    public static BackendSingletonSTORAGE getInstance(){
         return instance;
     }
 
-    /**
+    */
+/**
      * Provides a list of pre-made recipes which temporarily
      *  represent the entire database of recipes from the backend.
      * @return - recipes: List of all recipes.
-     */
+     *//*
+
     public List<Recipe> getRecipes() {
         return recipesList;
     }
 
-
-    /**
-     * Retrieves a list of recipes from the backend.
-     * @return List of recipes from the backend.
-     */
-    public void getRecipesFromBackend(Context context){
-        String URL = "http://10.0.2.2:8080/restRecipes";
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
-                response -> {
-                    Gson gson = new Gson();
-                    ArrayList<Recipe> recipesFromRest = gson.fromJson(response, new TypeToken<ArrayList<Recipe>>(){}.getType());
-                    recipesList = recipesFromRest;
-
-                }, error -> {
-            System.out.println(error);
-        });
-        requestQueue.add(stringRequest);
-    }
-    /**
+    */
+/**
      * Creates a list of pre-made recipes.
      * @return List of pre-made recipes.
-     */
+     *//*
+
     public ArrayList<Recipe> getPreMadeRecipeBank() {
 
         // Create recipes.
@@ -221,6 +200,7 @@ public class BackendSingleton {
         }
         return null;
     }
+*/
 /*    public void updateUser(){
         for(User usr:userList){
             if(usr.getUsername().equals(loggedIn.getUsername())){
@@ -229,25 +209,30 @@ public class BackendSingleton {
                 break;
             }
         }
-    }*/
+    }*//*
 
 
-    /**
+
+    */
+/**
      * Rates a recipe.
      * TODO: Have this update the database as well, once RestAPI works.
      * @param recipe Recipe to be rated.
      * @param user The user rating the recipe.
      * @param rating The rating to give the recipe.
-     */
+     *//*
+
     public void rateRecipe(Recipe recipe, User user, int rating) {
         recipe.addRating(rating, user.getUsername());
     }
 
-    /**
+    */
+/**
      * Returns the recipe corresponding to a given ID.
      * @param id The ID of the to-be-returned recipe.
      * @return The recipe corresponding to the given ID.
-     */
+     *//*
+
     public Recipe getRecipeById(Long id) {
         Recipe r = null;
 
@@ -260,36 +245,44 @@ public class BackendSingleton {
         return r;
     }
 
-    /**
+    */
+/**
      * Adds a comment to a recipe.
      * TODO: Have this update the database as well, once RestAPI works.
      * @param recipe Recipe to be rated.
      * @param comment Comment to be added to recipe.
-     */
+     *//*
+
     public void addComment(Recipe recipe, String comment) {
         recipe.AddComment(comment);
     }
 
-    /**
+    */
+/**
      * Deletes all recipes.
-     */
+     *//*
+
     public void deleteRecipes() {
         recipesList = new ArrayList<>();
     }
 
-    /**
+    */
+/**
      * Deletes all users.
-     */
+     *//*
+
     public void deleteUsers() {
         userList = new ArrayList<>();
     }
 
-    /**
+    */
+/**
      * Deletes all comments on a specified recipe.
      * @param id The id of the recipe whose comments are to be deleted.
      * @return 0 if no recipe matching the given ID, 1 if comments on
      *  recipe matching given ID successfully deleted.
-     */
+     *//*
+
     public int deleteCommentsOnRecipeByID(Long id) {
         Recipe r = getRecipeById(id);
         if (r == null) {
@@ -327,3 +320,4 @@ public class BackendSingleton {
         recipesList.add(r);
     }
 }
+*/
