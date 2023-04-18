@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
             mBtnFavourites.setVisibility(View.VISIBLE);
             mBtnSubmitRecipe.setVisibility(View.VISIBLE);
 
-            ArrayList<User> backendUsers = backendInstance.getAllUsersFromBackend(this);
+            //ArrayList<User> backendUsers = backendInstance.getUsers();
+            ArrayList<User> backendUsers = backendInstance.getAllUsersFromBackendAndSingleton(this);
         }
 
 

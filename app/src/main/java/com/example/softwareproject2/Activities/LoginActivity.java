@@ -23,11 +23,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button mBtnExit, mBtnLogin, mBtnCreateAccount;
     private EditText mEditTextUsername, mEditTextPassword;
+    private BackendSingleton backend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        backend = BackendSingleton.getInstance();
+        backend.getAllUsersFromBackendAndSingleton(getApplicationContext());
 
         // Connect to layout.
         setContentView(R.layout.activity_login_page);
@@ -50,8 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         mBtnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                // Get the fake backend
-                BackendSingleton backend = BackendSingleton.getInstance();
                 // Try to log in
                 String usr = mEditTextUsername.getText().toString();
                 String pw = mEditTextPassword.getText().toString();

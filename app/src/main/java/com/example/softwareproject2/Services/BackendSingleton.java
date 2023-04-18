@@ -14,7 +14,9 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -156,13 +158,17 @@ public class BackendSingleton {
         }*/
     }
 
-    public ArrayList<User> getAllUsersFromBackend(Context context){
+    public ArrayList<User> getAllUsersFromBackendAndSingleton(Context context){
         String URL = "http://10.0.2.2:8080/restUsers";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 response -> {
                     Gson gson = new Gson();
-                    userList = gson.fromJson(response, new TypeToken<ArrayList<User>>(){}.getType());
+                    ArrayList<User> remoteUserList = gson.fromJson(response, new TypeToken<ArrayList<User>>(){}.getType());
+                    Set<User> userSet = new LinkedHashSet<>(userList);
+                    userSet.addAll(remoteUserList);
+                    System.out.println(userSet);
+                    userList = new ArrayList<>(userSet);
 
                 }, error -> {
             System.out.println(error);
@@ -170,6 +176,34 @@ public class BackendSingleton {
         requestQueue.add(stringRequest);
         return userList;
     }
+
+    public void addUserToBackendAndSingleton(String userName, String password, Context ctx){
+        User current = new User(userName, password);
+        userList.add(current);
+
+        String URL = "http://10.0.2.2:8080/restAddUser";
+        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(current);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                response -> {
+                    System.out.println(response);
+                }, error -> {
+            System.out.println(error);
+        }) {
+            @Override
+            public byte[] getBody(){
+                return requestBody.getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+
 
 
 
@@ -240,11 +274,11 @@ public class BackendSingleton {
         return preMadeRecipes;
     }
 */
-/*
+
     public ArrayList<User> getUsers(){
         return userList;
     }
-    */
+
     public int logIn(String user, String pw){
         if (user.equals(adminUsername) && pw.equals(adminPassword)) {
             return 2;
@@ -281,6 +315,8 @@ public class BackendSingleton {
         return true;
     }
 
+
+    // OLD
     public void addUser(String userName, String password){
         User current = new User(userName, password);
         userList.add(current);
@@ -323,7 +359,6 @@ public class BackendSingleton {
      */
     public Recipe getRecipeById(Long id) {
         Recipe r = null;
-
         for (int i = 0; i < recipesList.size(); i++) {
             if (recipesList.get(i).getId() == id) {
                 r = recipesList.get(i);
@@ -363,8 +398,12 @@ public class BackendSingleton {
      * @return 0 if no recipe matching the given ID, 1 if comments on
      *  recipe matching given ID successfully deleted.
      */
-    public int deleteCommentsOnRecipeByID(Long id) {
-        Recipe r = getRecipeById(id);
+    public int deleteCommentsOnRecipeByID(Long id, Context ctx) {
+        Recipe r = getRecipeFromBackend(ctx, id);
+        r.setComments(new HashSet<>());
+        updateRecipeInTheBackend(ctx,r);
+        return 1;
+        /*
         if (r == null) {
             return 0;
         }
@@ -372,6 +411,7 @@ public class BackendSingleton {
             r.setComments(new HashSet<>());
             return 1;
         }
+        */
     }
 
     public int deleteUserByUsername(String username) {

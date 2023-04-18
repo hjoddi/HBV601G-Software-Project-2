@@ -54,7 +54,7 @@ public class AccountCreationActivity extends AppCompatActivity {
                 String pw = mEditTextPassword.getText().toString();
                 if(backend.isValidUsername(usr)){
                     backend.setLoggedIn(usr, pw);
-                    backend.addUser(usr, pw);
+                    backend.addUserToBackendAndSingleton(usr, pw, getApplicationContext());
                     openMainActivity();
                 }
                 else{

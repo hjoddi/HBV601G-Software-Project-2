@@ -72,7 +72,7 @@ public class AdminActivity extends AppCompatActivity {
                 else {
                     try {
                         long ID = Long.parseLong(mInputEditText.getText().toString());
-                        int deleteCommentsOnRecipe = mBackend.deleteCommentsOnRecipeByID(ID);
+                        int deleteCommentsOnRecipe = mBackend.deleteCommentsOnRecipeByID(ID, getApplicationContext());
                         if (deleteCommentsOnRecipe == 0) {
                             mFeedbackTextView.setText(getResources().getString(
                                     R.string.admin_feedback_noRecipeMatchingID));
