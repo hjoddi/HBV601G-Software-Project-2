@@ -2,7 +2,6 @@ package com.example.softwareproject2.Services;
 
 import android.content.Context;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Temporary class that provides data which will ultimately
@@ -89,7 +89,7 @@ public class BackendSingleton {
      * Retrieves a list of recipes from the backend.
      * @return List of recipes from the backend.
      */
-    public void getRecipesFromBackend(Context context){
+    public ArrayList<Recipe> getAllRecipesFromBackend(Context context){
         String URL = "http://10.0.2.2:8080/restRecipes";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
@@ -101,6 +101,27 @@ public class BackendSingleton {
             System.out.println(error);
         });
         requestQueue.add(stringRequest);
+        return recipesList;
+    }
+
+    public Recipe getRecipeFromBackend(Context context, Long id){
+        String URL = "http://10.0.2.2:8080/restRecipes";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                response -> {
+                    Gson gson = new Gson();
+                    recipesList = gson.fromJson(response, new TypeToken<ArrayList<Recipe>>(){}.getType());
+
+                }, error -> {
+            System.out.println(error);
+        });
+        requestQueue.add(stringRequest);
+        for (Recipe recipe: recipesList) {
+            if(recipe.getId().equals(id)){
+                return recipe;
+            }
+        }
+        return null;
     }
 
     public void updateRecipeInTheBackend(Context context, Recipe changedRecipe){
@@ -124,6 +145,11 @@ public class BackendSingleton {
             }
         };
         requestQueue.add(stringRequest);
+/*        for (Recipe currentRecipe : recipesList) {
+            if(currentRecipe.getId().equals(changedRecipe.getId())){
+                current
+            }
+        }*/
     }
 
 

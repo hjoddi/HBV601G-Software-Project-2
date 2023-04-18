@@ -10,35 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.Networking.NetworkManager;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
-import com.example.softwareproject2.Services.RecipeService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -68,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Connect to singleton backend
         BackendSingleton backendInstance = BackendSingleton.getInstance();
-        backendInstance.getRecipesFromBackend(this);
+        backendInstance.getAllRecipesFromBackend(this);
 
         // Connect UI widgets.
         //mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
@@ -205,11 +182,20 @@ public class MainActivity extends AppCompatActivity {
     /***** REST CONTROLER FIKT *****/
     public void restTestButton() {
         BackendSingleton backendInstance = BackendSingleton.getInstance();
+        Recipe r = backendInstance.getRecipeFromBackend(this, 4L);
+        System.out.println(r);
+
+
+        // TESTING UPDATING A RECIPE
+/*        BackendSingleton backendInstance = BackendSingleton.getInstance();
         HashSet<String> ingredients = new HashSet<>(); ingredients.add("Rice"); ingredients.add("Milk"); ingredients.add("Raisins");
-        Recipe r1 = new Recipe("Porridge", ingredients, "Add small amount of water and bring it to a boil. " +
+        Recipe r1 = new Recipe("THIS IS A TEST NAME", ingredients, "Add small amount of water and bring it to a boil. " +
                 "Then add the rice and milk and let it cook at low heat. Add raisings once it starts getting thicker.", "porridge");
         r1.setId(1L);
-        backendInstance.updateRecipeInTheBackend(this, r1);
+        backendInstance.updateRecipeInTheBackend(this, r1);*/
+
+
+        // TESTING GET ALL RECIPES
 /*        String URL = "http://10.0.2.2:8080/restRecipes";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
