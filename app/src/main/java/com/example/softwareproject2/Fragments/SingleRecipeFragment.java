@@ -161,7 +161,7 @@ public class SingleRecipeFragment extends Fragment {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float myRating, boolean fromUser) {
                     backend.rateRecipe(recipe, loggedInUser, (int) myRating);
-
+                    backend.updateRecipeInTheBackend(getContext(), recipe);
                     refreshFragment();
                 }
             });
@@ -171,7 +171,6 @@ public class SingleRecipeFragment extends Fragment {
                 public void onClick(View v) {
                     if (mCustomComment.getText().toString() != "") {
                         backend.addComment(recipe, mCustomComment.getText().toString());
-
                         refreshFragment();
                     }
                 }

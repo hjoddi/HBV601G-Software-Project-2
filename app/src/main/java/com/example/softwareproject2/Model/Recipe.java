@@ -28,9 +28,9 @@ public class Recipe implements Serializable {
 	 * @param username - The user adding the rating.
 	 */
 	public void addRating(int rating, String username) {
-		System.out.println("DEBUG - addRating()");
+		//System.out.println("DEBUG - addRating()");
 		if (!this.raters.contains(username)) {
-			System.out.println("DEBUG - !this.raters.contains(username)");
+			//System.out.println("DEBUG - !this.raters.contains(username)");
 			this.ratings.add(rating);
 			this.raters.add(username);
 			updateRatings();
