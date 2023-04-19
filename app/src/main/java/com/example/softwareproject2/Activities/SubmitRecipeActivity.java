@@ -140,7 +140,9 @@ public class SubmitRecipeActivity extends AppCompatActivity {
         Recipe recipe = new Recipe(name, ingredients, instructions, "customImage");
 
         // Add recipe to database.
-        mBackend.saveRecipe(recipe);
+        mBackend.updateRecipeInTheBackend(this, recipe);
+        mBackend.getAllRecipesFromBackend(this);
+        //mBackend.saveRecipe(recipe);
 
         // Create Intent to pass recipe to RecipeDetailActivity.
         Intent intent = new Intent(SubmitRecipeActivity.this, SingleRecipeActivity.class);
