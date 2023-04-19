@@ -75,11 +75,11 @@ public class FavouritesActivity extends AppCompatActivity {
 
         ArrayList<Recipe> allRecipes = new ArrayList<>(backend.getAllRecipesFromBackend(this));
         //ArrayList<Recipe> allRecipes = (ArrayList<Recipe>)backend.getRecipes();
-        HashSet<String> loggedInFavourites = loggedInUser.getFavoriteRecipes();
+        HashSet<Long> loggedInFavourites = loggedInUser.getFavoriteRecipes();
         ArrayList<Recipe> filteredRecipes = new ArrayList<>();
 
         for (Recipe rec:allRecipes) {
-            if(loggedInFavourites.contains(rec.getName())){
+            if(loggedInFavourites.contains(rec.getId())){
                 recipeNameList.add(rec.getName());
                 recipeImages.add(getResources().getIdentifier(rec.getImageName(),"drawable",getPackageName()));
             }
@@ -89,6 +89,7 @@ public class FavouritesActivity extends AppCompatActivity {
         }
         CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), recipeNameList, recipeImages);
         mListView.setAdapter(customBaseAdapter);
+
 
 
         // Establish widget functionalities.

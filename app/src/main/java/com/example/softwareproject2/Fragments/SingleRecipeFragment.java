@@ -131,11 +131,11 @@ public class SingleRecipeFragment extends Fragment {
             }else{
                 mCheckBoxFavourite.setVisibility(View.VISIBLE);
                 mSubmitCommentButton.setVisibility(View.VISIBLE);
-                HashSet<String> loggedInFavourites = loggedInUser.getFavoriteRecipes();
-                if(loggedInFavourites.contains(recipe.getName())){
+                HashSet<Long> loggedInFavourites = loggedInUser.getFavoriteRecipes();
+                if(loggedInFavourites.contains(recipe.getId())){
                     mCheckBoxFavourite.setChecked(true);
                 }
-                if (recipe.getRaters().contains(loggedInUser)) {
+                if (recipe.getRaters().contains(loggedInUser.getUsername())) {
                     mRatingBar.setIsIndicator(true);
                 }
                 else {
@@ -145,10 +145,11 @@ public class SingleRecipeFragment extends Fragment {
 
             mCheckBoxFavourite.setOnClickListener(v -> {
                 if(mCheckBoxFavourite.isChecked()){
-                    loggedInUser.addToFavoriteRecipes(recipe.getName());
+                    loggedInUser.addToFavoriteRecipes(recipe.getId());
+ 
                 }
                 else{
-                    loggedInUser.removeFromFavouriteRecipes(recipe.getName());
+                    loggedInUser.removeFromFavouriteRecipes(recipe.getId());
                 }
                 //System.out.println(loggedInUser.getFavoriteRecipes().toString());
 
