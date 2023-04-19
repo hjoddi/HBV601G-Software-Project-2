@@ -19,6 +19,7 @@ import com.example.softwareproject2.Services.RecipeService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class manages the view for the results of the user's search for
@@ -69,11 +70,14 @@ public class FavouritesActivity extends AppCompatActivity {
 */
 
         BackendSingleton backend = BackendSingleton.getInstance();
+        backend.getAllRecipesFromBackend(this);
+        backend.getAllUsersFromBackendAndSingleton(this);
+
         User loggedInUser = backend.getLoggedIn();
         ArrayList<Integer> recipeImages = new ArrayList<>();
         ArrayList<String> recipeNameList = new ArrayList<>();
 
-        ArrayList<Recipe> allRecipes = new ArrayList<>(backend.getAllRecipesFromBackend(this));
+        ArrayList<Recipe> allRecipes = new ArrayList<>(backend.getRecipes());
         //ArrayList<Recipe> allRecipes = (ArrayList<Recipe>)backend.getRecipes();
         HashSet<Long> loggedInFavourites = loggedInUser.getFavoriteRecipes();
         ArrayList<Recipe> filteredRecipes = new ArrayList<>();

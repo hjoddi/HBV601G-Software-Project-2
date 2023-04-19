@@ -23,6 +23,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        BackendSingleton.getInstance().getAllUsersFromBackendAndSingleton(this);
 
         // Connect to layout.
         setContentView(R.layout.activity_account_creation_page);

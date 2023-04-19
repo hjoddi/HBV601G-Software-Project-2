@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         // Connect to singleton backend
         BackendSingleton backendInstance = BackendSingleton.getInstance();
         backendInstance.getAllRecipesFromBackend(this);
+        //ArrayList<User> backendUsers = backendInstance.getAllUsersFromBackendAndSingleton(this);
 
         // Connect UI widgets.
         //mBtnGetRecipes = findViewById(R.id.btnGetRecipes);
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             mBtnSubmitRecipe.setVisibility(View.VISIBLE);
 
             //ArrayList<User> backendUsers = backendInstance.getUsers();
-            ArrayList<User> backendUsers = backendInstance.getAllUsersFromBackendAndSingleton(this);
+
         }
 
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Connect NetworkManager. TODO: Eyða þessu þegar networkign virkar
-        NetworkManager networkManager = NetworkManager.getInstance(this);
+        //NetworkManager networkManager = NetworkManager.getInstance(this);
 
         // Use NetworkManager to get recipes. TODO: Var svona í tutorial. Halda eða henda?
         /*
@@ -182,9 +183,18 @@ public class MainActivity extends AppCompatActivity {
 
     /***** REST CONTROLER FIKT *****/
     public void restTestButton() {
+        BackendSingleton backend = BackendSingleton.getInstance();
+        if(backend.getLoggedIn()!=null){
+            System.out.println(backend.getLoggedIn().getFavoriteRecipes());
+        }
+
+
+
+/*
         BackendSingleton backendInstance = BackendSingleton.getInstance();
         Recipe r = backendInstance.getRecipeFromBackend(this, 4L);
         System.out.println(r);
+*/
 
 
         // TESTING UPDATING A RECIPE

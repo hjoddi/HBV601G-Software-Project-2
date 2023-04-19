@@ -12,15 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.softwareproject2.Activities.SingleRecipeActivity;
 import com.example.softwareproject2.Adapter;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
@@ -94,6 +91,8 @@ public class SingleRecipeFragment extends Fragment {
 
             // Access backend.
             BackendSingleton backend = BackendSingleton.getInstance();
+/*            backend.getAllUsersFromBackendAndSingleton(getContext());
+            backend.getAllRecipesFromBackend(getContext());*/
 
             // Configure rating bar.
             mRatingBar.setRating(rating);
@@ -144,16 +143,18 @@ public class SingleRecipeFragment extends Fragment {
             }
 
             mCheckBoxFavourite.setOnClickListener(v -> {
+                System.out.println("CLICKED!");
                 if(mCheckBoxFavourite.isChecked()){
                     loggedInUser.addToFavoriteRecipes(recipe.getId());
- 
+                    backend.updateUserOnTheBackendAndSingleton(getContext(),backend.getUser(loggedInUser.getUsername()));
+
                 }
                 else{
                     loggedInUser.removeFromFavouriteRecipes(recipe.getId());
+                    backend.updateUserOnTheBackendAndSingleton(getContext(),backend.getUser(loggedInUser.getUsername()));
                 }
                 //System.out.println(loggedInUser.getFavoriteRecipes().toString());
-
-                //backend.updateUser();
+                //backend.updateUserOnTheBackendAndSingleton(getContext(), loggedInUser);
             });
 
             mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {

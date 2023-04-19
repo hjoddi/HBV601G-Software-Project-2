@@ -10,7 +10,7 @@ public class User {
     /**
      * Variables.
      */
-    private long ID;
+    private Long ID;
 
     private String username;
     private String password;
@@ -42,7 +42,7 @@ public class User {
     public long getID() {
         return ID;
     }
-    public void setID(long ID) {
+    public void setID(Long ID) {
         this.ID = ID;
     }
     public String getUsername() {

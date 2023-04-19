@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         backend = BackendSingleton.getInstance();
-        backend.getAllUsersFromBackendAndSingleton(getApplicationContext());
+        backend.getAllUsersFromBackendAndSingleton(this);
 
         // Connect to layout.
         setContentView(R.layout.activity_login_page);
