@@ -171,6 +171,7 @@ public class SingleRecipeFragment extends Fragment {
                 public void onClick(View v) {
                     if (mCustomComment.getText().toString() != "") {
                         backend.addComment(recipe, mCustomComment.getText().toString());
+                        backend.updateRecipeInTheBackend(getContext(), recipe);
                         refreshFragment();
                     }
                 }

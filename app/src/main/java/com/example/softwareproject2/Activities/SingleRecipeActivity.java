@@ -15,6 +15,9 @@ import com.example.softwareproject2.Fragments.SingleRecipeFragment;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
+import com.example.softwareproject2.Services.BackendSingleton;
+
+import java.util.ArrayList;
 
 /**
  * This class manages the view displaying information about a specific

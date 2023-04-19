@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.example.softwareproject2.CustomBaseAdapter;
 import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
+import com.example.softwareproject2.Services.BackendSingleton;
 import com.example.softwareproject2.Services.RecipeService;
 
 import java.util.ArrayList;
@@ -111,6 +112,13 @@ public class SearchResultActivity extends AppCompatActivity {
                 openSingleRecipeActivity(r);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        BackendSingleton b = BackendSingleton.getInstance();
+        b.getAllRecipesFromBackend(this);
+        super.onResume();
     }
 
     /**
