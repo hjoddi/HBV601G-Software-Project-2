@@ -137,19 +137,18 @@ public class SubmitRecipeActivity extends AppCompatActivity {
         Uri imageUri = getImageUri();
 
         // Create Recipe object with gathered information.
-        Recipe recipe = new Recipe(name, ingredients, instructions, "customImage");
+        Recipe recipe = new Recipe(name, ingredients, instructions, "placeholder");
 
         // Add recipe to database.
         mBackend.updateRecipeInTheBackend(this, recipe);
         mBackend.getAllRecipesFromBackend(this);
         //mBackend.saveRecipe(recipe);
 
-        // Create Intent to pass recipe to RecipeDetailActivity.
+        // Create Inten to pass recipe to RecipeDetailActivity.
         Intent intent = new Intent(SubmitRecipeActivity.this, SingleRecipeActivity.class);
         intent.putExtra("recipe", recipe);
         intent.putExtra("imageUri", imageUri);
         startActivity(intent);
-
     }
 
     private Uri getImageUri() {
