@@ -33,11 +33,11 @@ public class SubmitRecipeActivity extends AppCompatActivity {
     private ImageView mImageView;
     private EditText mNameEditText, mInstructionsEditText;
     private int numEditTexts;   // Number of dynamically created EditTexts.
-    private int selectPicture;  // Constant for comparing activity result code.
+    //private int selectPicture;  // Constant for comparing activity result code.
     private Uri imageUri;
     private BackendSingleton mBackend;
 
-    // Required code for submitting an image.
+/*    // Required code for submitting an image.
     private final ActivityResultLauncher<String> imagePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
@@ -49,7 +49,7 @@ public class SubmitRecipeActivity extends AppCompatActivity {
                     }
                 }
             }
-    );
+    );*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +63,10 @@ public class SubmitRecipeActivity extends AppCompatActivity {
         mBtnIngredientRemove = findViewById(R.id.submitRecipeActivityBtnRemove);
         mIngredientsLayout = findViewById(R.id.submitRecipeActivityIngredientLayout);
         numEditTexts = 0;
-        selectPicture = 200;
+        //selectPicture = 200;
         mBtnBack = findViewById(R.id.submitRecipeActivityBtnBack);
-        mBtnSelectImage = findViewById(R.id.submitRecipeActivityBtnSelectImage);
-        mImageView = findViewById(R.id.submitRecipeActivityImageView);
+        //mBtnSelectImage = findViewById(R.id.submitRecipeActivityBtnSelectImage);
+        //mImageView = findViewById(R.id.submitRecipeActivityImageView);
         mBtnSubmitRecipe = findViewById(R.id.submitRecipeActivityBtnSubmit);
         mNameEditText = findViewById(R.id.submitRecipeActivityNameEditText);
         mInstructionsEditText = findViewById(R.id.submitRecipeActivityInstructionsEditText);
@@ -100,12 +100,12 @@ public class SubmitRecipeActivity extends AppCompatActivity {
                 finish();
             }
         });
-        mBtnSelectImage.setOnClickListener(new View.OnClickListener() {
+/*        mBtnSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imagePickerLauncher.launch("image/*");
             }
-        });
+        });*/
         mBtnSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +134,7 @@ public class SubmitRecipeActivity extends AppCompatActivity {
         String instructions = mInstructionsEditText.getText().toString();
 
         // Get image.
-        Uri imageUri = getImageUri();
+        //Uri imageUri = getImageUri();
 
         // Create Recipe object with gathered information.
         Recipe recipe = new Recipe(name, ingredients, instructions, "placeholder");
