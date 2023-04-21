@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.softwareproject2.Model.Recipe;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
 
@@ -49,6 +50,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mBackend.deleteRecipes();
+                mBackend.deleteAllRecipesOnTheBackend(getApplicationContext());
                 mFeedbackTextView.setTextColor(Color.GREEN);
                 mFeedbackTextView.setText(getResources().getString(R.string.admin_feedback_recipesDeletedSuccessfully));
             }
@@ -126,6 +128,9 @@ public class AdminActivity extends AppCompatActivity {
                 else {
                     try {
                         long ID = Long.parseLong(mInputEditText.getText().toString());
+
+                        Recipe recipe = mBackend.getRecipeById(ID);
+                        mBackend.deleteRecipeOnTheBackend(getApplicationContext(), recipe);
                         int deleteRecipeByID = mBackend.deleteRecipeByID(ID);
                         if (deleteRecipeByID == 0) {
                             mFeedbackTextView.setText(getResources().getString(

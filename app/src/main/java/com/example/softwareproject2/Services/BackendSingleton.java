@@ -229,6 +229,39 @@ public class BackendSingleton {
         requestQueue.add(stringRequest);
     }
 
+    public void deleteAllRecipesOnTheBackend(Context context){
+        String URL = "http://10.0.2.2:8080/restDeleteAllRecipes";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                null, // response listener
+                error -> {
+                    System.out.println(error);
+                });
+        requestQueue.add(stringRequest);
+    }
+
+    public void deleteRecipeOnTheBackend(Context context, Recipe changedRecipe){
+        String URL = "http://10.0.2.2:8080/restDeleteRecipe";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(changedRecipe);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                response -> {
+                    System.out.println(response);
+                }, error -> {
+            System.out.println(error);
+        }) {
+            @Override
+            public byte[] getBody(){
+                return requestBody.getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 
 
 
