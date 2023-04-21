@@ -27,7 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mBtnGetRecipes; // Temp button for dev purposes.
-    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites, mBtnSubmitRecipe, mBtnREST;
+    private Button mBtnExit, mBtnSearchRecipes, mBtnLogin, mBtnlogout, mBtnFavourites, mBtnSubmitRecipe;
     private TextView mTextViewGreeting;
     private List<Recipe> recipeBank; // Network kallið á að fylla þennan lista af Recipe hlutum.
                                      // TODO: Eyða þessu þegar networkign virkar - recipeBank er temp meðan ég prufa networking.
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         mTextViewGreeting = findViewById(R.id.mainActivityTextViewGreeting);
         mBtnFavourites = findViewById(R.id.mainActivityButtonFavourites);
         mBtnSubmitRecipe = findViewById(R.id.mainActivityBtnSubmitRecipe);
-        mBtnREST = findViewById(R.id.mainActivityBtnREST);
 
         // Show login button if not logged in.
         if(backendInstance.getLoggedIn()==null){
@@ -80,14 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+/*
 
-        /***** REST CONTROLER FIKT *****/
-        mBtnREST.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                restTestButton();
-            }
-        });
 
         // Connect NetworkManager. TODO: Eyða þessu þegar networkign virkar
         //NetworkManager networkManager = NetworkManager.getInstance(this);
@@ -180,50 +173,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
-
-    /***** REST CONTROLER FIKT *****/
-    public void restTestButton() {
-        BackendSingleton backend = BackendSingleton.getInstance();
-        if(backend.getLoggedIn()!=null){
-            System.out.println(backend.getLoggedIn().getFavoriteRecipes());
-        }
-
-
-
-/*
-        BackendSingleton backendInstance = BackendSingleton.getInstance();
-        Recipe r = backendInstance.getRecipeFromBackend(this, 4L);
-        System.out.println(r);
-*/
-
-
-        // TESTING UPDATING A RECIPE
-/*        BackendSingleton backendInstance = BackendSingleton.getInstance();
-        HashSet<String> ingredients = new HashSet<>(); ingredients.add("Rice"); ingredients.add("Milk"); ingredients.add("Raisins");
-        Recipe r1 = new Recipe("THIS IS A TEST NAME", ingredients, "Add small amount of water and bring it to a boil. " +
-                "Then add the rice and milk and let it cook at low heat. Add raisings once it starts getting thicker.", "porridge");
-        r1.setId(1L);
-        backendInstance.updateRecipeInTheBackend(this, r1);*/
-
-
-        // TESTING GET ALL RECIPES
-/*        String URL = "http://10.0.2.2:8080/restRecipes";
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
-                response -> {
-                    Gson gson = new Gson();
-                    ArrayList<Recipe> recipeList = gson.fromJson(response, new TypeToken<ArrayList<Recipe>>(){}.getType());
-                    BackendSingleton backendSingleton = BackendSingleton.getInstance();
-
-                }, error -> {
-                    System.out.println(error);
-                });
-        requestQueue.add(stringRequest);*/
-    }
-
-
-
-
 
     /**
      * Navigates to SearchActivity.

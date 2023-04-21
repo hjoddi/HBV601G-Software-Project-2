@@ -57,6 +57,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mBackend.deleteUsers();
+                mBackend.deleteAllUsersOnTheBackend(getApplicationContext());
                 mFeedbackTextView.setTextColor(Color.GREEN);
                 mFeedbackTextView.setText(getResources().getString(R.string.admin_feedback_usersDeletedSuccessfully));
             }

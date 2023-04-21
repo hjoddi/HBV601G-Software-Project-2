@@ -218,6 +218,19 @@ public class BackendSingleton {
         requestQueue.add(stringRequest);
     }
 
+    public void deleteAllUsersOnTheBackend(Context context){
+        String URL = "http://10.0.2.2:8080/restDeleteAllUsers";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                null, // response listener
+                error -> {
+                    System.out.println(error);
+                });
+        requestQueue.add(stringRequest);
+    }
+
+
+
 
 
     public ArrayList<User> getUsers(){
