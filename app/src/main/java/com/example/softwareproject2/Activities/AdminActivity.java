@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.softwareproject2.Model.Recipe;
+import com.example.softwareproject2.Model.User;
 import com.example.softwareproject2.R;
 import com.example.softwareproject2.Services.BackendSingleton;
 
@@ -104,7 +105,10 @@ public class AdminActivity extends AppCompatActivity {
                 }
                 else {
                     String username = mInputEditText.getText().toString();
-                    int deleteUser = mBackend.deleteUserByUsername(username);
+                    User usr = mBackend.getUser(username);
+                    mBackend.deleteUserOnTheBackend(getApplicationContext(), usr);
+
+                    int deleteUser = 1;
 
                     if (deleteUser == 0) {
                         mFeedbackTextView.setTextColor(Color.RED);
@@ -113,7 +117,9 @@ public class AdminActivity extends AppCompatActivity {
                     else {
                         mFeedbackTextView.setTextColor(Color.GREEN);
                         mFeedbackTextView.setText(getResources().getString(R.string.admin_feedback_userDeletedSuccessfully));
+
                     }
+                    mBackend.getAllUsersFromBackendAndSingleton(getApplicationContext());
                 }
             }
         });

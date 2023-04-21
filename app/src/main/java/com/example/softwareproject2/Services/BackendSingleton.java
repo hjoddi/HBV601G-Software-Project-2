@@ -263,6 +263,30 @@ public class BackendSingleton {
         requestQueue.add(stringRequest);
     }
 
+    public void deleteUserOnTheBackend(Context context, User user){
+        String URL = "http://10.0.2.2:8080/restDeleteUser";
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(user);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                response -> {
+                    System.out.println(response);
+                }, error -> {
+            System.out.println(error);
+        }) {
+            @Override
+            public byte[] getBody(){
+                return requestBody.getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+
 
 
 
